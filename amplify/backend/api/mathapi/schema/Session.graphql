@@ -1,0 +1,48 @@
+type SessionStudent @model(queries: null)
+@key(name: "bySession", fields: ["sessionID", "id"])
+@key(name: "byStudent", fields: ["studentID", "id"])
+{
+  id: ID!
+  sessionID: ID!
+  studentID: ID!
+  scoreID: ID!
+  session: Session! @connection(fields: ["sessionID"])
+  student: Student! @connection(fields: ["studentID"])
+  code: ModelSessionStudentCode!
+  score: Int!
+  status: ModelSessionStudentStatus!
+  position(currentPosition: Int = 1): Int!
+}
+
+type Session @model 
+@key(name: "byAssignment", fields: ["assignmentID", "id"])
+{
+  id: ID!
+  assignmentID: ID!
+  name: String!
+  data: String!
+  status: ModelSessionStatus!
+  students: [SessionStudent] @connection(keyName: "bySession", fields: ["id"])
+}
+
+enum ModelSessionStudentCode {
+  A
+  B
+  C
+  D
+  F
+}
+
+enum ModelSessionStudentStatus {
+  notReady
+  ready
+  active
+  done
+  abandoned
+}
+
+enum ModelSessionStatus {
+  open
+  active
+  closed
+}

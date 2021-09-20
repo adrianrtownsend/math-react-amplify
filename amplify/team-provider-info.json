@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mathclient-dev-183221-authRole",
+      "UnauthRoleArn": "arn:aws:iam::330297565370:role/amplify-mathclient-dev-183221-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::330297565370:role/amplify-mathclient-dev-183221-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-mathclient-dev-183221-deployment",
+      "UnauthRoleName": "amplify-mathclient-dev-183221-unauthRole",
+      "StackName": "amplify-mathclient-dev-183221",
+      "StackId": "arn:aws:cloudformation:us-east-1:330297565370:stack/amplify-mathclient-dev-183221/4baebdd0-18d0-11ec-b674-1240661c4205",
+      "AmplifyAppId": "d3jjm03m0gfmd6"
+    },
+    "categories": {
+      "auth": {
+        "mathclient789e49cf": {}
+      }
+    }
+  }
+}

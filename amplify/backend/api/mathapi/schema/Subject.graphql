@@ -1,0 +1,18 @@
+type SubjectTeacher @model(queries: null)
+@key(name: "bySubject", fields: ["subjectID", "teacherID"])
+@key(name: "byTeacher", fields: ["teacherID", "subjectID"])
+{
+  id: ID!
+  subjectID: ID!
+  teacherID: ID!
+  subject: Subject! @connection(fields: ["subjectID"])
+  teacher: Teacher! @connection(fields: ["teacherID"])
+}
+
+type Subject @model {
+  id: ID!
+  name: String!
+  code: String!
+  classes: [Class] @connection(keyName: "bySubject", fields: ["id"])
+  teachers: [SubjectTeacher] @connection(keyName: "bySubject", fields: ["id"])
+}

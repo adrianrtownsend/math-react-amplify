@@ -1,0 +1,42 @@
+type Student @model
+@key(name: "byStudentUsername", fields: ["username", "id"])
+{
+  id: ID!
+  email: String! #unique
+  username: String! #unique
+  first: String!
+  last: String!
+  password: String!
+  role: ModelUserRole! # set default on creation
+  img: String # double check property type
+  classes: [ClassStudent] @connection(keyName: "byStudent", fields: ["id"])
+  sessions: [SessionStudent] @connection(keyName: "byStudent", fields: ["id"])
+}
+
+type Teacher @model 
+@key(name: "byTeacherUsername", fields: ["username", "id"])
+{
+  # fields
+  id: ID!
+  email: String! #unique
+  username: String! #unique
+  first: String!
+  last: String!
+  password: String!
+  role: ModelUserRole! # set default on creation
+  img: String # double check property type
+  classes: [Class] @connection(keyName: "byTeacher", fields: ["id"])
+  suffix: ModelUserSuffix # required(role=teacher)
+  subjects: [SubjectTeacher] @connection(keyName: "byTeacher", fields: ["id"])
+}
+
+enum ModelUserRole {
+  teacher
+  student
+}
+
+enum ModelUserSuffix {
+  Mr
+  Mrs
+  Ms
+}

@@ -1,0 +1,44 @@
+type ClassAssignment @model(queries: null)
+@key(name: "byClass", fields: ["classID", "assignmentID"])
+@key(name: "byAssignment", fields: ["assignmentID", "classID"])
+{
+  id: ID!
+  classID: ID!
+  assignmentID: ID!
+  class: Class! @connection(fields: ["classID"])
+  assignment: Assignment! @connection(fields: ["assignmentID"])
+}
+
+
+type ClassStudent @model(queries: null)
+@key(name: "byClass", fields: ["classID", "studentID"])
+@key(name: "byStudent", fields: ["studentID", "classID"])
+{
+  id: ID!
+  classID: ID!
+  studentID: ID!
+  class: Class! @connection(fields: ["classID"])
+  student: Student! @connection(fields: ["studentID"])
+}
+
+type Class @model
+@key(name: "byTeacher", fields: ["teacherID", "id"])
+@key(name: "bySubject", fields: ["subjectID", "id"]) 
+{
+  id: ID!
+  name: String!
+  code: String! #uniqiue
+  studentLimit: Int!
+  status: ModelClassStatus!
+  teacherID: ID!
+  subjectID: ID!
+  assignments: [ClassAssignment] @connection(keyName: "byClass", fields: ["id"])
+  students: [ClassStudent] @connection(keyName: "byClass", fields: ["id"])
+}
+
+enum ModelClassStatus {
+  inactive
+  open
+  active
+  closed
+}
