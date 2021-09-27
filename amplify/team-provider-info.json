@@ -12,8 +12,14 @@
       "AmplifyAppId": "d3jjm03m0gfmd6"
     },
     "categories": {
+      "function": {
+        "S3Trigger6cfa8e80": {
+          "deploymentBucketName": "amplify-mathclient-dev-183221-deployment",
+          "s3Key": "amplify-builds/S3Trigger6cfa8e80-5850315a6e2b59754758-build.zip"
+        }
+      },
       "auth": {
-        "mathclient789e49cf": {}
+        "mathclientd6ed7a2b": {}
       }
     }
   }

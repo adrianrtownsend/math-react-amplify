@@ -16,6 +16,10 @@ type SessionStudent @model(queries: null)
 
 type Session @model 
 @key(name: "byAssignment", fields: ["assignmentID", "id"])
+@auth(rules: [
+  { allow: groups, groups: ["Admin"] },
+  { allow: groups, groups: ["Student"], operations: [create, read, update] }
+])
 {
   id: ID!
   assignmentID: ID!
@@ -24,6 +28,11 @@ type Session @model
   status: ModelSessionStatus!
   students: [SessionStudent] @connection(keyName: "bySession", fields: ["id"])
 }
+
+# Need conditional validations on
+# createSession
+# updateSession(SessionStudent)
+# both need conditional - if student can do another session of this assignmentID
 
 enum ModelSessionStudentCode {
   A

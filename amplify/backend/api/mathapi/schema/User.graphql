@@ -1,5 +1,10 @@
 type Student @model
 @key(name: "byStudentUsername", fields: ["username", "id"])
+@auth(rules: [
+  { allow: groups, groups: ["Admin", "Teachers"] },
+  { allow: groups, groups: ["Students"], operations: [create, read] },
+  { allow: owner }
+])
 {
   id: ID!
   email: String! #unique
@@ -15,6 +20,11 @@ type Student @model
 
 type Teacher @model 
 @key(name: "byTeacherUsername", fields: ["username", "id"])
+@auth(rules: [
+  { allow: groups, groups: ["Admin"] },
+  { allow: groups, groups: ["Teachers"], operations: [create, read] },
+  { allow: owner }
+])
 {
   # fields
   id: ID!

@@ -2,19 +2,27 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateBlogInput = {
+export type CreateAnswerInput = {
   id?: string | null,
+  questionID: string,
+  label: string,
   name: string,
+  value: boolean,
+  selected?: boolean | null,
 };
 
-export type ModelBlogConditionInput = {
+export type ModelAnswerConditionInput = {
+  questionID?: ModelIDInput | null,
+  label?: ModelStringInput | null,
   name?: ModelStringInput | null,
-  and?: Array< ModelBlogConditionInput | null > | null,
-  or?: Array< ModelBlogConditionInput | null > | null,
-  not?: ModelBlogConditionInput | null,
+  value?: ModelBooleanInput | null,
+  selected?: ModelBooleanInput | null,
+  and?: Array< ModelAnswerConditionInput | null > | null,
+  or?: Array< ModelAnswerConditionInput | null > | null,
+  not?: ModelAnswerConditionInput | null,
 };
 
-export type ModelStringInput = {
+export type ModelIDInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -54,72 +62,7 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Blog = {
-  __typename: "Blog",
-  id: string,
-  name: string,
-  posts?: ModelPostConnection | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type ModelPostConnection = {
-  __typename: "ModelPostConnection",
-  items?:  Array<Post | null > | null,
-  nextToken?: string | null,
-};
-
-export type Post = {
-  __typename: "Post",
-  id: string,
-  title: string,
-  blogID: string,
-  blog?: Blog | null,
-  comments?: ModelCommentConnection | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type ModelCommentConnection = {
-  __typename: "ModelCommentConnection",
-  items?:  Array<Comment | null > | null,
-  nextToken?: string | null,
-};
-
-export type Comment = {
-  __typename: "Comment",
-  id: string,
-  postID: string,
-  post?: Post | null,
-  content: string,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateBlogInput = {
-  id: string,
-  name?: string | null,
-};
-
-export type DeleteBlogInput = {
-  id: string,
-};
-
-export type CreatePostInput = {
-  id?: string | null,
-  title: string,
-  blogID: string,
-};
-
-export type ModelPostConditionInput = {
-  title?: ModelStringInput | null,
-  blogID?: ModelIDInput | null,
-  and?: Array< ModelPostConditionInput | null > | null,
-  or?: Array< ModelPostConditionInput | null > | null,
-  not?: ModelPostConditionInput | null,
-};
-
-export type ModelIDInput = {
+export type ModelStringInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -135,143 +78,830 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type UpdatePostInput = {
-  id: string,
-  title?: string | null,
-  blogID?: string | null,
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
-export type DeletePostInput = {
+export type Answer = {
+  __typename: "Answer",
+  id: string,
+  questionID: string,
+  label: string,
+  name: string,
+  value: boolean,
+  selected?: boolean | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateAnswerInput = {
+  id: string,
+  questionID?: string | null,
+  label?: string | null,
+  name?: string | null,
+  value?: boolean | null,
+  selected?: boolean | null,
+};
+
+export type DeleteAnswerInput = {
   id: string,
 };
 
-export type CreateCommentInput = {
+export type CreateQuestionInput = {
   id?: string | null,
-  postID: string,
-  content: string,
+  assignmentID: string,
+  name: string,
 };
 
-export type ModelCommentConditionInput = {
-  postID?: ModelIDInput | null,
-  content?: ModelStringInput | null,
-  and?: Array< ModelCommentConditionInput | null > | null,
-  or?: Array< ModelCommentConditionInput | null > | null,
-  not?: ModelCommentConditionInput | null,
+export type ModelQuestionConditionInput = {
+  assignmentID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelQuestionConditionInput | null > | null,
+  or?: Array< ModelQuestionConditionInput | null > | null,
+  not?: ModelQuestionConditionInput | null,
 };
 
-export type UpdateCommentInput = {
+export type Question = {
+  __typename: "Question",
   id: string,
-  postID?: string | null,
-  content?: string | null,
+  assignmentID: string,
+  name: string,
+  answers?: ModelAnswerConnection | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
-export type DeleteCommentInput = {
+export type ModelAnswerConnection = {
+  __typename: "ModelAnswerConnection",
+  items?:  Array<Answer | null > | null,
+  nextToken?: string | null,
+};
+
+export type UpdateQuestionInput = {
+  id: string,
+  assignmentID?: string | null,
+  name?: string | null,
+};
+
+export type DeleteQuestionInput = {
   id: string,
 };
 
-export type ModelBlogFilterInput = {
+export type CreateAssignmentInput = {
+  id?: string | null,
+  classID: string,
+  name: string,
+  data: string,
+  status: ModelAssignmentStatus,
+  timeLimit: number,
+};
+
+export enum ModelAssignmentStatus {
+  open = "open",
+  closed = "closed",
+}
+
+
+export type ModelAssignmentConditionInput = {
+  classID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  data?: ModelStringInput | null,
+  status?: ModelModelAssignmentStatusInput | null,
+  timeLimit?: ModelIntInput | null,
+  and?: Array< ModelAssignmentConditionInput | null > | null,
+  or?: Array< ModelAssignmentConditionInput | null > | null,
+  not?: ModelAssignmentConditionInput | null,
+};
+
+export type ModelModelAssignmentStatusInput = {
+  eq?: ModelAssignmentStatus | null,
+  ne?: ModelAssignmentStatus | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type Assignment = {
+  __typename: "Assignment",
+  id: string,
+  classID: string,
+  name: string,
+  data: string,
+  status: ModelAssignmentStatus,
+  questions?: ModelQuestionConnection | null,
+  timeLimit: number,
+  sessions?: ModelSessionConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type ModelQuestionConnection = {
+  __typename: "ModelQuestionConnection",
+  items?:  Array<Question | null > | null,
+  nextToken?: string | null,
+};
+
+export type ModelSessionConnection = {
+  __typename: "ModelSessionConnection",
+  items?:  Array<Session | null > | null,
+  nextToken?: string | null,
+};
+
+export type Session = {
+  __typename: "Session",
+  id: string,
+  assignmentID: string,
+  name: string,
+  data: string,
+  status: ModelSessionStatus,
+  students?: ModelSessionStudentConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export enum ModelSessionStatus {
+  open = "open",
+  active = "active",
+  closed = "closed",
+}
+
+
+export type ModelSessionStudentConnection = {
+  __typename: "ModelSessionStudentConnection",
+  items?:  Array<SessionStudent | null > | null,
+  nextToken?: string | null,
+};
+
+export type SessionStudent = {
+  __typename: "SessionStudent",
+  id: string,
+  sessionID: string,
+  studentID: string,
+  scoreID: string,
+  session: Session,
+  student: Student,
+  code: ModelSessionStudentCode,
+  score: number,
+  status: ModelSessionStudentStatus,
+  position: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type Student = {
+  __typename: "Student",
+  id: string,
+  email: string,
+  username: string,
+  first: string,
+  last: string,
+  password: string,
+  role: ModelUserRole,
+  img?: string | null,
+  classes?: ModelClassStudentConnection | null,
+  sessions?: ModelSessionStudentConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export enum ModelUserRole {
+  teacher = "teacher",
+  student = "student",
+}
+
+
+export type ModelClassStudentConnection = {
+  __typename: "ModelClassStudentConnection",
+  items?:  Array<ClassStudent | null > | null,
+  nextToken?: string | null,
+};
+
+export type ClassStudent = {
+  __typename: "ClassStudent",
+  id: string,
+  classID: string,
+  studentID: string,
+  class: Class,
+  student: Student,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type Class = {
+  __typename: "Class",
+  id: string,
+  name: string,
+  code: string,
+  studentLimit: number,
+  status: ModelClassStatus,
+  teacherID: string,
+  subjectID: string,
+  assignments?: ModelAssignmentConnection | null,
+  students?:  Array<ClassStudent | null > | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export enum ModelClassStatus {
+  inactive = "inactive",
+  open = "open",
+  active = "active",
+  closed = "closed",
+}
+
+
+export type ModelAssignmentConnection = {
+  __typename: "ModelAssignmentConnection",
+  items?:  Array<Assignment | null > | null,
+  nextToken?: string | null,
+};
+
+export enum ModelSessionStudentCode {
+  A = "A",
+  B = "B",
+  C = "C",
+  D = "D",
+  F = "F",
+}
+
+
+export enum ModelSessionStudentStatus {
+  notReady = "notReady",
+  ready = "ready",
+  active = "active",
+  done = "done",
+  abandoned = "abandoned",
+}
+
+
+export type UpdateAssignmentInput = {
+  id: string,
+  classID?: string | null,
+  name?: string | null,
+  data?: string | null,
+  status?: ModelAssignmentStatus | null,
+  timeLimit?: number | null,
+};
+
+export type DeleteAssignmentInput = {
+  id: string,
+};
+
+export type CreateClassStudentInput = {
+  id?: string | null,
+  classID: string,
+  studentID: string,
+};
+
+export type ModelClassStudentConditionInput = {
+  classID?: ModelIDInput | null,
+  studentID?: ModelIDInput | null,
+  and?: Array< ModelClassStudentConditionInput | null > | null,
+  or?: Array< ModelClassStudentConditionInput | null > | null,
+  not?: ModelClassStudentConditionInput | null,
+};
+
+export type UpdateClassStudentInput = {
+  id: string,
+  classID?: string | null,
+  studentID?: string | null,
+};
+
+export type DeleteClassStudentInput = {
+  id: string,
+};
+
+export type CreateClassInput = {
+  id?: string | null,
+  name: string,
+  code: string,
+  studentLimit: number,
+  status: ModelClassStatus,
+  teacherID: string,
+  subjectID: string,
+};
+
+export type ModelClassConditionInput = {
+  name?: ModelStringInput | null,
+  code?: ModelStringInput | null,
+  studentLimit?: ModelIntInput | null,
+  status?: ModelModelClassStatusInput | null,
+  teacherID?: ModelIDInput | null,
+  subjectID?: ModelIDInput | null,
+  and?: Array< ModelClassConditionInput | null > | null,
+  or?: Array< ModelClassConditionInput | null > | null,
+  not?: ModelClassConditionInput | null,
+};
+
+export type ModelModelClassStatusInput = {
+  eq?: ModelClassStatus | null,
+  ne?: ModelClassStatus | null,
+};
+
+export type UpdateClassInput = {
+  id: string,
+  name?: string | null,
+  code?: string | null,
+  studentLimit?: number | null,
+  status?: ModelClassStatus | null,
+  teacherID?: string | null,
+  subjectID?: string | null,
+};
+
+export type DeleteClassInput = {
+  id: string,
+};
+
+export type CreateSessionStudentInput = {
+  id?: string | null,
+  sessionID: string,
+  studentID: string,
+  scoreID: string,
+  code: ModelSessionStudentCode,
+  score: number,
+  status: ModelSessionStudentStatus,
+  position: number,
+};
+
+export type ModelSessionStudentConditionInput = {
+  sessionID?: ModelIDInput | null,
+  studentID?: ModelIDInput | null,
+  scoreID?: ModelIDInput | null,
+  code?: ModelModelSessionStudentCodeInput | null,
+  score?: ModelIntInput | null,
+  status?: ModelModelSessionStudentStatusInput | null,
+  position?: ModelIntInput | null,
+  and?: Array< ModelSessionStudentConditionInput | null > | null,
+  or?: Array< ModelSessionStudentConditionInput | null > | null,
+  not?: ModelSessionStudentConditionInput | null,
+};
+
+export type ModelModelSessionStudentCodeInput = {
+  eq?: ModelSessionStudentCode | null,
+  ne?: ModelSessionStudentCode | null,
+};
+
+export type ModelModelSessionStudentStatusInput = {
+  eq?: ModelSessionStudentStatus | null,
+  ne?: ModelSessionStudentStatus | null,
+};
+
+export type UpdateSessionStudentInput = {
+  id: string,
+  sessionID?: string | null,
+  studentID?: string | null,
+  scoreID?: string | null,
+  code?: ModelSessionStudentCode | null,
+  score?: number | null,
+  status?: ModelSessionStudentStatus | null,
+  position?: number | null,
+};
+
+export type DeleteSessionStudentInput = {
+  id: string,
+};
+
+export type CreateSessionInput = {
+  id?: string | null,
+  assignmentID: string,
+  name: string,
+  data: string,
+  status: ModelSessionStatus,
+};
+
+export type ModelSessionConditionInput = {
+  assignmentID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  data?: ModelStringInput | null,
+  status?: ModelModelSessionStatusInput | null,
+  and?: Array< ModelSessionConditionInput | null > | null,
+  or?: Array< ModelSessionConditionInput | null > | null,
+  not?: ModelSessionConditionInput | null,
+};
+
+export type ModelModelSessionStatusInput = {
+  eq?: ModelSessionStatus | null,
+  ne?: ModelSessionStatus | null,
+};
+
+export type UpdateSessionInput = {
+  id: string,
+  assignmentID?: string | null,
+  name?: string | null,
+  data?: string | null,
+  status?: ModelSessionStatus | null,
+};
+
+export type DeleteSessionInput = {
+  id: string,
+};
+
+export type CreateSubjectTeacherInput = {
+  id?: string | null,
+  subjectID: string,
+  teacherID: string,
+};
+
+export type ModelSubjectTeacherConditionInput = {
+  subjectID?: ModelIDInput | null,
+  teacherID?: ModelIDInput | null,
+  and?: Array< ModelSubjectTeacherConditionInput | null > | null,
+  or?: Array< ModelSubjectTeacherConditionInput | null > | null,
+  not?: ModelSubjectTeacherConditionInput | null,
+};
+
+export type SubjectTeacher = {
+  __typename: "SubjectTeacher",
+  id: string,
+  subjectID: string,
+  teacherID: string,
+  subject: Subject,
+  teacher: Teacher,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type Subject = {
+  __typename: "Subject",
+  id: string,
+  name: string,
+  code: string,
+  classes?: ModelClassConnection | null,
+  teachers?: ModelSubjectTeacherConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelClassConnection = {
+  __typename: "ModelClassConnection",
+  items?:  Array<Class | null > | null,
+  nextToken?: string | null,
+};
+
+export type ModelSubjectTeacherConnection = {
+  __typename: "ModelSubjectTeacherConnection",
+  items?:  Array<SubjectTeacher | null > | null,
+  nextToken?: string | null,
+};
+
+export type Teacher = {
+  __typename: "Teacher",
+  id: string,
+  email: string,
+  username: string,
+  first: string,
+  last: string,
+  password: string,
+  role: ModelUserRole,
+  img?: string | null,
+  classes?: ModelClassConnection | null,
+  suffix?: ModelUserSuffix | null,
+  subjects?: ModelSubjectTeacherConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export enum ModelUserSuffix {
+  Mr = "Mr",
+  Mrs = "Mrs",
+  Ms = "Ms",
+}
+
+
+export type UpdateSubjectTeacherInput = {
+  id: string,
+  subjectID?: string | null,
+  teacherID?: string | null,
+};
+
+export type DeleteSubjectTeacherInput = {
+  id: string,
+};
+
+export type CreateSubjectInput = {
+  id?: string | null,
+  name: string,
+  code: string,
+};
+
+export type ModelSubjectConditionInput = {
+  name?: ModelStringInput | null,
+  code?: ModelStringInput | null,
+  and?: Array< ModelSubjectConditionInput | null > | null,
+  or?: Array< ModelSubjectConditionInput | null > | null,
+  not?: ModelSubjectConditionInput | null,
+};
+
+export type UpdateSubjectInput = {
+  id: string,
+  name?: string | null,
+  code?: string | null,
+};
+
+export type DeleteSubjectInput = {
+  id: string,
+};
+
+export type CreateStudentInput = {
+  id?: string | null,
+  email: string,
+  username: string,
+  first: string,
+  last: string,
+  password: string,
+  role: ModelUserRole,
+  img?: string | null,
+};
+
+export type ModelStudentConditionInput = {
+  email?: ModelStringInput | null,
+  username?: ModelStringInput | null,
+  first?: ModelStringInput | null,
+  last?: ModelStringInput | null,
+  password?: ModelStringInput | null,
+  role?: ModelModelUserRoleInput | null,
+  img?: ModelStringInput | null,
+  and?: Array< ModelStudentConditionInput | null > | null,
+  or?: Array< ModelStudentConditionInput | null > | null,
+  not?: ModelStudentConditionInput | null,
+};
+
+export type ModelModelUserRoleInput = {
+  eq?: ModelUserRole | null,
+  ne?: ModelUserRole | null,
+};
+
+export type UpdateStudentInput = {
+  id: string,
+  email?: string | null,
+  username?: string | null,
+  first?: string | null,
+  last?: string | null,
+  password?: string | null,
+  role?: ModelUserRole | null,
+  img?: string | null,
+};
+
+export type DeleteStudentInput = {
+  id: string,
+};
+
+export type CreateTeacherInput = {
+  id?: string | null,
+  email: string,
+  username: string,
+  first: string,
+  last: string,
+  password: string,
+  role: ModelUserRole,
+  img?: string | null,
+  suffix?: ModelUserSuffix | null,
+};
+
+export type ModelTeacherConditionInput = {
+  email?: ModelStringInput | null,
+  username?: ModelStringInput | null,
+  first?: ModelStringInput | null,
+  last?: ModelStringInput | null,
+  password?: ModelStringInput | null,
+  role?: ModelModelUserRoleInput | null,
+  img?: ModelStringInput | null,
+  suffix?: ModelModelUserSuffixInput | null,
+  and?: Array< ModelTeacherConditionInput | null > | null,
+  or?: Array< ModelTeacherConditionInput | null > | null,
+  not?: ModelTeacherConditionInput | null,
+};
+
+export type ModelModelUserSuffixInput = {
+  eq?: ModelUserSuffix | null,
+  ne?: ModelUserSuffix | null,
+};
+
+export type UpdateTeacherInput = {
+  id: string,
+  email?: string | null,
+  username?: string | null,
+  first?: string | null,
+  last?: string | null,
+  password?: string | null,
+  role?: ModelUserRole | null,
+  img?: string | null,
+  suffix?: ModelUserSuffix | null,
+};
+
+export type DeleteTeacherInput = {
+  id: string,
+};
+
+export type ModelAnswerFilterInput = {
+  id?: ModelIDInput | null,
+  questionID?: ModelIDInput | null,
+  label?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  value?: ModelBooleanInput | null,
+  selected?: ModelBooleanInput | null,
+  and?: Array< ModelAnswerFilterInput | null > | null,
+  or?: Array< ModelAnswerFilterInput | null > | null,
+  not?: ModelAnswerFilterInput | null,
+};
+
+export type ModelQuestionFilterInput = {
+  id?: ModelIDInput | null,
+  assignmentID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelQuestionFilterInput | null > | null,
+  or?: Array< ModelQuestionFilterInput | null > | null,
+  not?: ModelQuestionFilterInput | null,
+};
+
+export type ModelAssignmentFilterInput = {
+  id?: ModelIDInput | null,
+  classID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  data?: ModelStringInput | null,
+  status?: ModelModelAssignmentStatusInput | null,
+  timeLimit?: ModelIntInput | null,
+  and?: Array< ModelAssignmentFilterInput | null > | null,
+  or?: Array< ModelAssignmentFilterInput | null > | null,
+  not?: ModelAssignmentFilterInput | null,
+};
+
+export type ModelClassFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  and?: Array< ModelBlogFilterInput | null > | null,
-  or?: Array< ModelBlogFilterInput | null > | null,
-  not?: ModelBlogFilterInput | null,
+  code?: ModelStringInput | null,
+  studentLimit?: ModelIntInput | null,
+  status?: ModelModelClassStatusInput | null,
+  teacherID?: ModelIDInput | null,
+  subjectID?: ModelIDInput | null,
+  and?: Array< ModelClassFilterInput | null > | null,
+  or?: Array< ModelClassFilterInput | null > | null,
+  not?: ModelClassFilterInput | null,
 };
 
-export type ModelBlogConnection = {
-  __typename: "ModelBlogConnection",
-  items?:  Array<Blog | null > | null,
-  nextToken?: string | null,
-};
-
-export type ModelPostFilterInput = {
+export type ModelSessionFilterInput = {
   id?: ModelIDInput | null,
-  title?: ModelStringInput | null,
-  blogID?: ModelIDInput | null,
-  and?: Array< ModelPostFilterInput | null > | null,
-  or?: Array< ModelPostFilterInput | null > | null,
-  not?: ModelPostFilterInput | null,
+  assignmentID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  data?: ModelStringInput | null,
+  status?: ModelModelSessionStatusInput | null,
+  and?: Array< ModelSessionFilterInput | null > | null,
+  or?: Array< ModelSessionFilterInput | null > | null,
+  not?: ModelSessionFilterInput | null,
 };
 
-export type ModelCommentFilterInput = {
+export type ModelSubjectFilterInput = {
   id?: ModelIDInput | null,
-  postID?: ModelIDInput | null,
-  content?: ModelStringInput | null,
-  and?: Array< ModelCommentFilterInput | null > | null,
-  or?: Array< ModelCommentFilterInput | null > | null,
-  not?: ModelCommentFilterInput | null,
+  name?: ModelStringInput | null,
+  code?: ModelStringInput | null,
+  and?: Array< ModelSubjectFilterInput | null > | null,
+  or?: Array< ModelSubjectFilterInput | null > | null,
+  not?: ModelSubjectFilterInput | null,
 };
 
-export type CreateBlogMutationVariables = {
-  input: CreateBlogInput,
-  condition?: ModelBlogConditionInput | null,
+export type ModelSubjectConnection = {
+  __typename: "ModelSubjectConnection",
+  items?:  Array<Subject | null > | null,
+  nextToken?: string | null,
 };
 
-export type CreateBlogMutation = {
-  createBlog?:  {
-    __typename: "Blog",
+export type ModelStudentFilterInput = {
+  id?: ModelIDInput | null,
+  email?: ModelStringInput | null,
+  username?: ModelStringInput | null,
+  first?: ModelStringInput | null,
+  last?: ModelStringInput | null,
+  password?: ModelStringInput | null,
+  role?: ModelModelUserRoleInput | null,
+  img?: ModelStringInput | null,
+  and?: Array< ModelStudentFilterInput | null > | null,
+  or?: Array< ModelStudentFilterInput | null > | null,
+  not?: ModelStudentFilterInput | null,
+};
+
+export type ModelStudentConnection = {
+  __typename: "ModelStudentConnection",
+  items?:  Array<Student | null > | null,
+  nextToken?: string | null,
+};
+
+export type ModelTeacherFilterInput = {
+  id?: ModelIDInput | null,
+  email?: ModelStringInput | null,
+  username?: ModelStringInput | null,
+  first?: ModelStringInput | null,
+  last?: ModelStringInput | null,
+  password?: ModelStringInput | null,
+  role?: ModelModelUserRoleInput | null,
+  img?: ModelStringInput | null,
+  suffix?: ModelModelUserSuffixInput | null,
+  and?: Array< ModelTeacherFilterInput | null > | null,
+  or?: Array< ModelTeacherFilterInput | null > | null,
+  not?: ModelTeacherFilterInput | null,
+};
+
+export type ModelTeacherConnection = {
+  __typename: "ModelTeacherConnection",
+  items?:  Array<Teacher | null > | null,
+  nextToken?: string | null,
+};
+
+export type CreateAnswerMutationVariables = {
+  input: CreateAnswerInput,
+  condition?: ModelAnswerConditionInput | null,
+};
+
+export type CreateAnswerMutation = {
+  createAnswer?:  {
+    __typename: "Answer",
     id: string,
+    questionID: string,
+    label: string,
     name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
-      items?:  Array< {
-        __typename: "Post",
-        id: string,
-        title: string,
-        blogID: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
+    value: boolean,
+    selected?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdateBlogMutationVariables = {
-  input: UpdateBlogInput,
-  condition?: ModelBlogConditionInput | null,
+export type UpdateAnswerMutationVariables = {
+  input: UpdateAnswerInput,
+  condition?: ModelAnswerConditionInput | null,
 };
 
-export type UpdateBlogMutation = {
-  updateBlog?:  {
-    __typename: "Blog",
+export type UpdateAnswerMutation = {
+  updateAnswer?:  {
+    __typename: "Answer",
     id: string,
+    questionID: string,
+    label: string,
     name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
-      items?:  Array< {
-        __typename: "Post",
-        id: string,
-        title: string,
-        blogID: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
+    value: boolean,
+    selected?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeleteBlogMutationVariables = {
-  input: DeleteBlogInput,
-  condition?: ModelBlogConditionInput | null,
+export type DeleteAnswerMutationVariables = {
+  input: DeleteAnswerInput,
+  condition?: ModelAnswerConditionInput | null,
 };
 
-export type DeleteBlogMutation = {
-  deleteBlog?:  {
-    __typename: "Blog",
+export type DeleteAnswerMutation = {
+  deleteAnswer?:  {
+    __typename: "Answer",
     id: string,
+    questionID: string,
+    label: string,
     name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
+    value: boolean,
+    selected?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateQuestionMutationVariables = {
+  input: CreateQuestionInput,
+  condition?: ModelQuestionConditionInput | null,
+};
+
+export type CreateQuestionMutation = {
+  createQuestion?:  {
+    __typename: "Question",
+    id: string,
+    assignmentID: string,
+    name: string,
+    answers?:  {
+      __typename: "ModelAnswerConnection",
       items?:  Array< {
-        __typename: "Post",
+        __typename: "Answer",
         id: string,
-        title: string,
-        blogID: string,
+        questionID: string,
+        label: string,
+        name: string,
+        value: boolean,
+        selected?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -282,35 +912,27 @@ export type DeleteBlogMutation = {
   } | null,
 };
 
-export type CreatePostMutationVariables = {
-  input: CreatePostInput,
-  condition?: ModelPostConditionInput | null,
+export type UpdateQuestionMutationVariables = {
+  input: UpdateQuestionInput,
+  condition?: ModelQuestionConditionInput | null,
 };
 
-export type CreatePostMutation = {
-  createPost?:  {
-    __typename: "Post",
+export type UpdateQuestionMutation = {
+  updateQuestion?:  {
+    __typename: "Question",
     id: string,
-    title: string,
-    blogID: string,
-    blog?:  {
-      __typename: "Blog",
-      id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
+    assignmentID: string,
+    name: string,
+    answers?:  {
+      __typename: "ModelAnswerConnection",
       items?:  Array< {
-        __typename: "Comment",
+        __typename: "Answer",
         id: string,
-        postID: string,
-        content: string,
+        questionID: string,
+        label: string,
+        name: string,
+        value: boolean,
+        selected?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -321,35 +943,27 @@ export type CreatePostMutation = {
   } | null,
 };
 
-export type UpdatePostMutationVariables = {
-  input: UpdatePostInput,
-  condition?: ModelPostConditionInput | null,
+export type DeleteQuestionMutationVariables = {
+  input: DeleteQuestionInput,
+  condition?: ModelQuestionConditionInput | null,
 };
 
-export type UpdatePostMutation = {
-  updatePost?:  {
-    __typename: "Post",
+export type DeleteQuestionMutation = {
+  deleteQuestion?:  {
+    __typename: "Question",
     id: string,
-    title: string,
-    blogID: string,
-    blog?:  {
-      __typename: "Blog",
-      id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
+    assignmentID: string,
+    name: string,
+    answers?:  {
+      __typename: "ModelAnswerConnection",
       items?:  Array< {
-        __typename: "Comment",
+        __typename: "Answer",
         id: string,
-        postID: string,
-        content: string,
+        questionID: string,
+        label: string,
+        name: string,
+        value: boolean,
+        selected?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -360,191 +974,1543 @@ export type UpdatePostMutation = {
   } | null,
 };
 
-export type DeletePostMutationVariables = {
-  input: DeletePostInput,
-  condition?: ModelPostConditionInput | null,
+export type CreateAssignmentMutationVariables = {
+  input: CreateAssignmentInput,
+  condition?: ModelAssignmentConditionInput | null,
 };
 
-export type DeletePostMutation = {
-  deletePost?:  {
-    __typename: "Post",
+export type CreateAssignmentMutation = {
+  createAssignment?:  {
+    __typename: "Assignment",
     id: string,
-    title: string,
-    blogID: string,
-    blog?:  {
-      __typename: "Blog",
-      id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
+    classID: string,
+    name: string,
+    data: string,
+    status: ModelAssignmentStatus,
+    questions?:  {
+      __typename: "ModelQuestionConnection",
       items?:  Array< {
-        __typename: "Comment",
+        __typename: "Question",
         id: string,
-        postID: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreateCommentMutationVariables = {
-  input: CreateCommentInput,
-  condition?: ModelCommentConditionInput | null,
-};
-
-export type CreateCommentMutation = {
-  createComment?:  {
-    __typename: "Comment",
-    id: string,
-    postID: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blogID: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
+        assignmentID: string,
         name: string,
         createdAt: string,
         updatedAt: string,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
     } | null,
-    content: string,
+    timeLimit: number,
+    sessions?:  {
+      __typename: "ModelSessionConnection",
+      items?:  Array< {
+        __typename: "Session",
+        id: string,
+        assignmentID: string,
+        name: string,
+        data: string,
+        status: ModelSessionStatus,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
-export type UpdateCommentMutationVariables = {
-  input: UpdateCommentInput,
-  condition?: ModelCommentConditionInput | null,
+export type UpdateAssignmentMutationVariables = {
+  input: UpdateAssignmentInput,
+  condition?: ModelAssignmentConditionInput | null,
 };
 
-export type UpdateCommentMutation = {
-  updateComment?:  {
-    __typename: "Comment",
+export type UpdateAssignmentMutation = {
+  updateAssignment?:  {
+    __typename: "Assignment",
     id: string,
-    postID: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blogID: string,
-      blog?:  {
-        __typename: "Blog",
+    classID: string,
+    name: string,
+    data: string,
+    status: ModelAssignmentStatus,
+    questions?:  {
+      __typename: "ModelQuestionConnection",
+      items?:  Array< {
+        __typename: "Question",
         id: string,
+        assignmentID: string,
         name: string,
         createdAt: string,
         updatedAt: string,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
     } | null,
-    content: string,
+    timeLimit: number,
+    sessions?:  {
+      __typename: "ModelSessionConnection",
+      items?:  Array< {
+        __typename: "Session",
+        id: string,
+        assignmentID: string,
+        name: string,
+        data: string,
+        status: ModelSessionStatus,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
-export type DeleteCommentMutationVariables = {
-  input: DeleteCommentInput,
-  condition?: ModelCommentConditionInput | null,
+export type DeleteAssignmentMutationVariables = {
+  input: DeleteAssignmentInput,
+  condition?: ModelAssignmentConditionInput | null,
 };
 
-export type DeleteCommentMutation = {
-  deleteComment?:  {
-    __typename: "Comment",
+export type DeleteAssignmentMutation = {
+  deleteAssignment?:  {
+    __typename: "Assignment",
     id: string,
-    postID: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blogID: string,
-      blog?:  {
-        __typename: "Blog",
+    classID: string,
+    name: string,
+    data: string,
+    status: ModelAssignmentStatus,
+    questions?:  {
+      __typename: "ModelQuestionConnection",
+      items?:  Array< {
+        __typename: "Question",
         id: string,
+        assignmentID: string,
         name: string,
         createdAt: string,
         updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    timeLimit: number,
+    sessions?:  {
+      __typename: "ModelSessionConnection",
+      items?:  Array< {
+        __typename: "Session",
+        id: string,
+        assignmentID: string,
+        name: string,
+        data: string,
+        status: ModelSessionStatus,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateClassStudentMutationVariables = {
+  input: CreateClassStudentInput,
+  condition?: ModelClassStudentConditionInput | null,
+};
+
+export type CreateClassStudentMutation = {
+  createClassStudent?:  {
+    __typename: "ClassStudent",
+    id: string,
+    classID: string,
+    studentID: string,
+    class:  {
+      __typename: "Class",
+      id: string,
+      name: string,
+      code: string,
+      studentLimit: number,
+      status: ModelClassStatus,
+      teacherID: string,
+      subjectID: string,
+      assignments?:  {
+        __typename: "ModelAssignmentConnection",
+        nextToken?: string | null,
       } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
+      students?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateClassStudentMutationVariables = {
+  input: UpdateClassStudentInput,
+  condition?: ModelClassStudentConditionInput | null,
+};
+
+export type UpdateClassStudentMutation = {
+  updateClassStudent?:  {
+    __typename: "ClassStudent",
+    id: string,
+    classID: string,
+    studentID: string,
+    class:  {
+      __typename: "Class",
+      id: string,
+      name: string,
+      code: string,
+      studentLimit: number,
+      status: ModelClassStatus,
+      teacherID: string,
+      subjectID: string,
+      assignments?:  {
+        __typename: "ModelAssignmentConnection",
+        nextToken?: string | null,
+      } | null,
+      students?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteClassStudentMutationVariables = {
+  input: DeleteClassStudentInput,
+  condition?: ModelClassStudentConditionInput | null,
+};
+
+export type DeleteClassStudentMutation = {
+  deleteClassStudent?:  {
+    __typename: "ClassStudent",
+    id: string,
+    classID: string,
+    studentID: string,
+    class:  {
+      __typename: "Class",
+      id: string,
+      name: string,
+      code: string,
+      studentLimit: number,
+      status: ModelClassStatus,
+      teacherID: string,
+      subjectID: string,
+      assignments?:  {
+        __typename: "ModelAssignmentConnection",
+        nextToken?: string | null,
+      } | null,
+      students?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateClassMutationVariables = {
+  input: CreateClassInput,
+  condition?: ModelClassConditionInput | null,
+};
+
+export type CreateClassMutation = {
+  createClass?:  {
+    __typename: "Class",
+    id: string,
+    name: string,
+    code: string,
+    studentLimit: number,
+    status: ModelClassStatus,
+    teacherID: string,
+    subjectID: string,
+    assignments?:  {
+      __typename: "ModelAssignmentConnection",
+      items?:  Array< {
+        __typename: "Assignment",
+        id: string,
+        classID: string,
+        name: string,
+        data: string,
+        status: ModelAssignmentStatus,
+        timeLimit: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
     } | null,
-    content: string,
+    students?:  Array< {
+      __typename: "ClassStudent",
+      id: string,
+      classID: string,
+      studentID: string,
+      class:  {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      student:  {
+        __typename: "Student",
+        id: string,
+        email: string,
+        username: string,
+        first: string,
+        last: string,
+        password: string,
+        role: ModelUserRole,
+        img?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateClassMutationVariables = {
+  input: UpdateClassInput,
+  condition?: ModelClassConditionInput | null,
+};
+
+export type UpdateClassMutation = {
+  updateClass?:  {
+    __typename: "Class",
+    id: string,
+    name: string,
+    code: string,
+    studentLimit: number,
+    status: ModelClassStatus,
+    teacherID: string,
+    subjectID: string,
+    assignments?:  {
+      __typename: "ModelAssignmentConnection",
+      items?:  Array< {
+        __typename: "Assignment",
+        id: string,
+        classID: string,
+        name: string,
+        data: string,
+        status: ModelAssignmentStatus,
+        timeLimit: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    students?:  Array< {
+      __typename: "ClassStudent",
+      id: string,
+      classID: string,
+      studentID: string,
+      class:  {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      student:  {
+        __typename: "Student",
+        id: string,
+        email: string,
+        username: string,
+        first: string,
+        last: string,
+        password: string,
+        role: ModelUserRole,
+        img?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteClassMutationVariables = {
+  input: DeleteClassInput,
+  condition?: ModelClassConditionInput | null,
+};
+
+export type DeleteClassMutation = {
+  deleteClass?:  {
+    __typename: "Class",
+    id: string,
+    name: string,
+    code: string,
+    studentLimit: number,
+    status: ModelClassStatus,
+    teacherID: string,
+    subjectID: string,
+    assignments?:  {
+      __typename: "ModelAssignmentConnection",
+      items?:  Array< {
+        __typename: "Assignment",
+        id: string,
+        classID: string,
+        name: string,
+        data: string,
+        status: ModelAssignmentStatus,
+        timeLimit: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    students?:  Array< {
+      __typename: "ClassStudent",
+      id: string,
+      classID: string,
+      studentID: string,
+      class:  {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      student:  {
+        __typename: "Student",
+        id: string,
+        email: string,
+        username: string,
+        first: string,
+        last: string,
+        password: string,
+        role: ModelUserRole,
+        img?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateSessionStudentMutationVariables = {
+  input: CreateSessionStudentInput,
+  condition?: ModelSessionStudentConditionInput | null,
+};
+
+export type CreateSessionStudentMutation = {
+  createSessionStudent?:  {
+    __typename: "SessionStudent",
+    id: string,
+    sessionID: string,
+    studentID: string,
+    scoreID: string,
+    session:  {
+      __typename: "Session",
+      id: string,
+      assignmentID: string,
+      name: string,
+      data: string,
+      status: ModelSessionStatus,
+      students?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    code: ModelSessionStudentCode,
+    score: number,
+    status: ModelSessionStudentStatus,
+    position: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type GetBlogQueryVariables = {
+export type UpdateSessionStudentMutationVariables = {
+  input: UpdateSessionStudentInput,
+  condition?: ModelSessionStudentConditionInput | null,
+};
+
+export type UpdateSessionStudentMutation = {
+  updateSessionStudent?:  {
+    __typename: "SessionStudent",
+    id: string,
+    sessionID: string,
+    studentID: string,
+    scoreID: string,
+    session:  {
+      __typename: "Session",
+      id: string,
+      assignmentID: string,
+      name: string,
+      data: string,
+      status: ModelSessionStatus,
+      students?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    code: ModelSessionStudentCode,
+    score: number,
+    status: ModelSessionStudentStatus,
+    position: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSessionStudentMutationVariables = {
+  input: DeleteSessionStudentInput,
+  condition?: ModelSessionStudentConditionInput | null,
+};
+
+export type DeleteSessionStudentMutation = {
+  deleteSessionStudent?:  {
+    __typename: "SessionStudent",
+    id: string,
+    sessionID: string,
+    studentID: string,
+    scoreID: string,
+    session:  {
+      __typename: "Session",
+      id: string,
+      assignmentID: string,
+      name: string,
+      data: string,
+      status: ModelSessionStatus,
+      students?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    code: ModelSessionStudentCode,
+    score: number,
+    status: ModelSessionStudentStatus,
+    position: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateSessionMutationVariables = {
+  input: CreateSessionInput,
+  condition?: ModelSessionConditionInput | null,
+};
+
+export type CreateSessionMutation = {
+  createSession?:  {
+    __typename: "Session",
+    id: string,
+    assignmentID: string,
+    name: string,
+    data: string,
+    status: ModelSessionStatus,
+    students?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateSessionMutationVariables = {
+  input: UpdateSessionInput,
+  condition?: ModelSessionConditionInput | null,
+};
+
+export type UpdateSessionMutation = {
+  updateSession?:  {
+    __typename: "Session",
+    id: string,
+    assignmentID: string,
+    name: string,
+    data: string,
+    status: ModelSessionStatus,
+    students?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSessionMutationVariables = {
+  input: DeleteSessionInput,
+  condition?: ModelSessionConditionInput | null,
+};
+
+export type DeleteSessionMutation = {
+  deleteSession?:  {
+    __typename: "Session",
+    id: string,
+    assignmentID: string,
+    name: string,
+    data: string,
+    status: ModelSessionStatus,
+    students?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateSubjectTeacherMutationVariables = {
+  input: CreateSubjectTeacherInput,
+  condition?: ModelSubjectTeacherConditionInput | null,
+};
+
+export type CreateSubjectTeacherMutation = {
+  createSubjectTeacher?:  {
+    __typename: "SubjectTeacher",
+    id: string,
+    subjectID: string,
+    teacherID: string,
+    subject:  {
+      __typename: "Subject",
+      id: string,
+      name: string,
+      code: string,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      teachers?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    teacher:  {
+      __typename: "Teacher",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      suffix?: ModelUserSuffix | null,
+      subjects?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateSubjectTeacherMutationVariables = {
+  input: UpdateSubjectTeacherInput,
+  condition?: ModelSubjectTeacherConditionInput | null,
+};
+
+export type UpdateSubjectTeacherMutation = {
+  updateSubjectTeacher?:  {
+    __typename: "SubjectTeacher",
+    id: string,
+    subjectID: string,
+    teacherID: string,
+    subject:  {
+      __typename: "Subject",
+      id: string,
+      name: string,
+      code: string,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      teachers?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    teacher:  {
+      __typename: "Teacher",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      suffix?: ModelUserSuffix | null,
+      subjects?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteSubjectTeacherMutationVariables = {
+  input: DeleteSubjectTeacherInput,
+  condition?: ModelSubjectTeacherConditionInput | null,
+};
+
+export type DeleteSubjectTeacherMutation = {
+  deleteSubjectTeacher?:  {
+    __typename: "SubjectTeacher",
+    id: string,
+    subjectID: string,
+    teacherID: string,
+    subject:  {
+      __typename: "Subject",
+      id: string,
+      name: string,
+      code: string,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      teachers?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    teacher:  {
+      __typename: "Teacher",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      suffix?: ModelUserSuffix | null,
+      subjects?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateSubjectMutationVariables = {
+  input: CreateSubjectInput,
+  condition?: ModelSubjectConditionInput | null,
+};
+
+export type CreateSubjectMutation = {
+  createSubject?:  {
+    __typename: "Subject",
+    id: string,
+    name: string,
+    code: string,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    teachers?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateSubjectMutationVariables = {
+  input: UpdateSubjectInput,
+  condition?: ModelSubjectConditionInput | null,
+};
+
+export type UpdateSubjectMutation = {
+  updateSubject?:  {
+    __typename: "Subject",
+    id: string,
+    name: string,
+    code: string,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    teachers?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSubjectMutationVariables = {
+  input: DeleteSubjectInput,
+  condition?: ModelSubjectConditionInput | null,
+};
+
+export type DeleteSubjectMutation = {
+  deleteSubject?:  {
+    __typename: "Subject",
+    id: string,
+    name: string,
+    code: string,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    teachers?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateStudentMutationVariables = {
+  input: CreateStudentInput,
+  condition?: ModelStudentConditionInput | null,
+};
+
+export type CreateStudentMutation = {
+  createStudent?:  {
+    __typename: "Student",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassStudentConnection",
+      items?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    sessions?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateStudentMutationVariables = {
+  input: UpdateStudentInput,
+  condition?: ModelStudentConditionInput | null,
+};
+
+export type UpdateStudentMutation = {
+  updateStudent?:  {
+    __typename: "Student",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassStudentConnection",
+      items?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    sessions?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteStudentMutationVariables = {
+  input: DeleteStudentInput,
+  condition?: ModelStudentConditionInput | null,
+};
+
+export type DeleteStudentMutation = {
+  deleteStudent?:  {
+    __typename: "Student",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassStudentConnection",
+      items?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    sessions?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateTeacherMutationVariables = {
+  input: CreateTeacherInput,
+  condition?: ModelTeacherConditionInput | null,
+};
+
+export type CreateTeacherMutation = {
+  createTeacher?:  {
+    __typename: "Teacher",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    suffix?: ModelUserSuffix | null,
+    subjects?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateTeacherMutationVariables = {
+  input: UpdateTeacherInput,
+  condition?: ModelTeacherConditionInput | null,
+};
+
+export type UpdateTeacherMutation = {
+  updateTeacher?:  {
+    __typename: "Teacher",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    suffix?: ModelUserSuffix | null,
+    subjects?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteTeacherMutationVariables = {
+  input: DeleteTeacherInput,
+  condition?: ModelTeacherConditionInput | null,
+};
+
+export type DeleteTeacherMutation = {
+  deleteTeacher?:  {
+    __typename: "Teacher",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    suffix?: ModelUserSuffix | null,
+    subjects?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type GetAnswerQueryVariables = {
   id: string,
 };
 
-export type GetBlogQuery = {
-  getBlog?:  {
-    __typename: "Blog",
+export type GetAnswerQuery = {
+  getAnswer?:  {
+    __typename: "Answer",
     id: string,
+    questionID: string,
+    label: string,
     name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
-      items?:  Array< {
-        __typename: "Post",
-        id: string,
-        title: string,
-        blogID: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
+    value: boolean,
+    selected?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListBlogsQueryVariables = {
-  filter?: ModelBlogFilterInput | null,
+export type ListAnswersQueryVariables = {
+  filter?: ModelAnswerFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListBlogsQuery = {
-  listBlogs?:  {
-    __typename: "ModelBlogConnection",
+export type ListAnswersQuery = {
+  listAnswers?:  {
+    __typename: "ModelAnswerConnection",
     items?:  Array< {
-      __typename: "Blog",
+      __typename: "Answer",
       id: string,
+      questionID: string,
+      label: string,
       name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      value: boolean,
+      selected?: boolean | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetQuestionQueryVariables = {
+  id: string,
+};
+
+export type GetQuestionQuery = {
+  getQuestion?:  {
+    __typename: "Question",
+    id: string,
+    assignmentID: string,
+    name: string,
+    answers?:  {
+      __typename: "ModelAnswerConnection",
+      items?:  Array< {
+        __typename: "Answer",
+        id: string,
+        questionID: string,
+        label: string,
+        name: string,
+        value: boolean,
+        selected?: boolean | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListQuestionsQueryVariables = {
+  filter?: ModelQuestionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListQuestionsQuery = {
+  listQuestions?:  {
+    __typename: "ModelQuestionConnection",
+    items?:  Array< {
+      __typename: "Question",
+      id: string,
+      assignmentID: string,
+      name: string,
+      answers?:  {
+        __typename: "ModelAnswerConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -554,34 +2520,219 @@ export type ListBlogsQuery = {
   } | null,
 };
 
-export type GetPostQueryVariables = {
+export type GetAssignmentQueryVariables = {
   id: string,
 };
 
-export type GetPostQuery = {
-  getPost?:  {
-    __typename: "Post",
+export type GetAssignmentQuery = {
+  getAssignment?:  {
+    __typename: "Assignment",
     id: string,
-    title: string,
-    blogID: string,
-    blog?:  {
-      __typename: "Blog",
+    classID: string,
+    name: string,
+    data: string,
+    status: ModelAssignmentStatus,
+    questions?:  {
+      __typename: "ModelQuestionConnection",
+      items?:  Array< {
+        __typename: "Question",
+        id: string,
+        assignmentID: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    timeLimit: number,
+    sessions?:  {
+      __typename: "ModelSessionConnection",
+      items?:  Array< {
+        __typename: "Session",
+        id: string,
+        assignmentID: string,
+        name: string,
+        data: string,
+        status: ModelSessionStatus,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListAssignmentsQueryVariables = {
+  filter?: ModelAssignmentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListAssignmentsQuery = {
+  listAssignments?:  {
+    __typename: "ModelAssignmentConnection",
+    items?:  Array< {
+      __typename: "Assignment",
       id: string,
+      classID: string,
       name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      data: string,
+      status: ModelAssignmentStatus,
+      questions?:  {
+        __typename: "ModelQuestionConnection",
+        nextToken?: string | null,
+      } | null,
+      timeLimit: number,
+      sessions?:  {
+        __typename: "ModelSessionConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetClassQueryVariables = {
+  id: string,
+};
+
+export type GetClassQuery = {
+  getClass?:  {
+    __typename: "Class",
+    id: string,
+    name: string,
+    code: string,
+    studentLimit: number,
+    status: ModelClassStatus,
+    teacherID: string,
+    subjectID: string,
+    assignments?:  {
+      __typename: "ModelAssignmentConnection",
       items?:  Array< {
-        __typename: "Comment",
+        __typename: "Assignment",
         id: string,
-        postID: string,
-        content: string,
+        classID: string,
+        name: string,
+        data: string,
+        status: ModelAssignmentStatus,
+        timeLimit: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    students?:  Array< {
+      __typename: "ClassStudent",
+      id: string,
+      classID: string,
+      studentID: string,
+      class:  {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      student:  {
+        __typename: "Student",
+        id: string,
+        email: string,
+        username: string,
+        first: string,
+        last: string,
+        password: string,
+        role: ModelUserRole,
+        img?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListClassesQueryVariables = {
+  filter?: ModelClassFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListClassesQuery = {
+  listClasses?:  {
+    __typename: "ModelClassConnection",
+    items?:  Array< {
+      __typename: "Class",
+      id: string,
+      name: string,
+      code: string,
+      studentLimit: number,
+      status: ModelClassStatus,
+      teacherID: string,
+      subjectID: string,
+      assignments?:  {
+        __typename: "ModelAssignmentConnection",
+        nextToken?: string | null,
+      } | null,
+      students?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetSessionQueryVariables = {
+  id: string,
+};
+
+export type GetSessionQuery = {
+  getSession?:  {
+    __typename: "Session",
+    id: string,
+    assignmentID: string,
+    name: string,
+    data: string,
+    status: ModelSessionStatus,
+    students?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -592,29 +2743,24 @@ export type GetPostQuery = {
   } | null,
 };
 
-export type ListPostsQueryVariables = {
-  filter?: ModelPostFilterInput | null,
+export type ListSessionsQueryVariables = {
+  filter?: ModelSessionFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListPostsQuery = {
-  listPosts?:  {
-    __typename: "ModelPostConnection",
+export type ListSessionsQuery = {
+  listSessions?:  {
+    __typename: "ModelSessionConnection",
     items?:  Array< {
-      __typename: "Post",
+      __typename: "Session",
       id: string,
-      title: string,
-      blogID: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
+      assignmentID: string,
+      name: string,
+      data: string,
+      status: ModelSessionStatus,
+      students?:  {
+        __typename: "ModelSessionStudentConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -624,62 +2770,73 @@ export type ListPostsQuery = {
   } | null,
 };
 
-export type GetCommentQueryVariables = {
+export type GetSubjectQueryVariables = {
   id: string,
 };
 
-export type GetCommentQuery = {
-  getComment?:  {
-    __typename: "Comment",
+export type GetSubjectQuery = {
+  getSubject?:  {
+    __typename: "Subject",
     id: string,
-    postID: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blogID: string,
-      blog?:  {
-        __typename: "Blog",
+    name: string,
+    code: string,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
         id: string,
         name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
         createdAt: string,
         updatedAt: string,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
     } | null,
-    content: string,
+    teachers?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListCommentsQueryVariables = {
-  filter?: ModelCommentFilterInput | null,
+export type ListSubjectsQueryVariables = {
+  filter?: ModelSubjectFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListCommentsQuery = {
-  listComments?:  {
-    __typename: "ModelCommentConnection",
+export type ListSubjectsQuery = {
+  listSubjects?:  {
+    __typename: "ModelSubjectConnection",
     items?:  Array< {
-      __typename: "Comment",
+      __typename: "Subject",
       id: string,
-      postID: string,
-      post?:  {
-        __typename: "Post",
-        id: string,
-        title: string,
-        blogID: string,
-        createdAt: string,
-        updatedAt: string,
+      name: string,
+      code: string,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
       } | null,
-      content: string,
+      teachers?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -687,18 +2844,46 @@ export type ListCommentsQuery = {
   } | null,
 };
 
-export type OnCreateBlogSubscription = {
-  onCreateBlog?:  {
-    __typename: "Blog",
+export type GetStudentQueryVariables = {
+  id: string,
+};
+
+export type GetStudentQuery = {
+  getStudent?:  {
+    __typename: "Student",
     id: string,
-    name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassStudentConnection",
       items?:  Array< {
-        __typename: "Post",
+        __typename: "ClassStudent",
         id: string,
-        title: string,
-        blogID: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    sessions?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -706,111 +2891,191 @@ export type OnCreateBlogSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
-export type OnUpdateBlogSubscription = {
-  onUpdateBlog?:  {
-    __typename: "Blog",
-    id: string,
-    name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
-      items?:  Array< {
-        __typename: "Post",
-        id: string,
-        title: string,
-        blogID: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+export type ListStudentsQueryVariables = {
+  filter?: ModelStudentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type OnDeleteBlogSubscription = {
-  onDeleteBlog?:  {
-    __typename: "Blog",
-    id: string,
-    name: string,
-    posts?:  {
-      __typename: "ModelPostConnection",
-      items?:  Array< {
-        __typename: "Post",
-        id: string,
-        title: string,
-        blogID: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreatePostSubscription = {
-  onCreatePost?:  {
-    __typename: "Post",
-    id: string,
-    title: string,
-    blogID: string,
-    blog?:  {
-      __typename: "Blog",
+export type ListStudentsQuery = {
+  listStudents?:  {
+    __typename: "ModelStudentConnection",
+    items?:  Array< {
+      __typename: "Student",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetTeacherQueryVariables = {
+  id: string,
+};
+
+export type GetTeacherQuery = {
+  getTeacher?:  {
+    __typename: "Teacher",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassConnection",
       items?:  Array< {
-        __typename: "Comment",
+        __typename: "Class",
         id: string,
-        postID: string,
-        content: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    suffix?: ModelUserSuffix | null,
+    subjects?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
-export type OnUpdatePostSubscription = {
-  onUpdatePost?:  {
-    __typename: "Post",
-    id: string,
-    title: string,
-    blogID: string,
-    blog?:  {
-      __typename: "Blog",
+export type ListTeachersQueryVariables = {
+  filter?: ModelTeacherFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListTeachersQuery = {
+  listTeachers?:  {
+    __typename: "ModelTeacherConnection",
+    items?:  Array< {
+      __typename: "Teacher",
       id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      suffix?: ModelUserSuffix | null,
+      subjects?:  {
+        __typename: "ModelSubjectTeacherConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreateAnswerSubscription = {
+  onCreateAnswer?:  {
+    __typename: "Answer",
+    id: string,
+    questionID: string,
+    label: string,
+    name: string,
+    value: boolean,
+    selected?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateAnswerSubscription = {
+  onUpdateAnswer?:  {
+    __typename: "Answer",
+    id: string,
+    questionID: string,
+    label: string,
+    name: string,
+    value: boolean,
+    selected?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteAnswerSubscription = {
+  onDeleteAnswer?:  {
+    __typename: "Answer",
+    id: string,
+    questionID: string,
+    label: string,
+    name: string,
+    value: boolean,
+    selected?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateQuestionSubscription = {
+  onCreateQuestion?:  {
+    __typename: "Question",
+    id: string,
+    assignmentID: string,
+    name: string,
+    answers?:  {
+      __typename: "ModelAnswerConnection",
       items?:  Array< {
-        __typename: "Comment",
+        __typename: "Answer",
         id: string,
-        postID: string,
-        content: string,
+        questionID: string,
+        label: string,
+        name: string,
+        value: boolean,
+        selected?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -821,30 +3086,22 @@ export type OnUpdatePostSubscription = {
   } | null,
 };
 
-export type OnDeletePostSubscription = {
-  onDeletePost?:  {
-    __typename: "Post",
+export type OnUpdateQuestionSubscription = {
+  onUpdateQuestion?:  {
+    __typename: "Question",
     id: string,
-    title: string,
-    blogID: string,
-    blog?:  {
-      __typename: "Blog",
-      id: string,
-      name: string,
-      posts?:  {
-        __typename: "ModelPostConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
+    assignmentID: string,
+    name: string,
+    answers?:  {
+      __typename: "ModelAnswerConnection",
       items?:  Array< {
-        __typename: "Comment",
+        __typename: "Answer",
         id: string,
-        postID: string,
-        content: string,
+        questionID: string,
+        label: string,
+        name: string,
+        value: boolean,
+        selected?: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -855,92 +3112,1378 @@ export type OnDeletePostSubscription = {
   } | null,
 };
 
-export type OnCreateCommentSubscription = {
-  onCreateComment?:  {
-    __typename: "Comment",
+export type OnDeleteQuestionSubscription = {
+  onDeleteQuestion?:  {
+    __typename: "Question",
     id: string,
-    postID: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      blogID: string,
-      blog?:  {
-        __typename: "Blog",
+    assignmentID: string,
+    name: string,
+    answers?:  {
+      __typename: "ModelAnswerConnection",
+      items?:  Array< {
+        __typename: "Answer",
         id: string,
+        questionID: string,
+        label: string,
+        name: string,
+        value: boolean,
+        selected?: boolean | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateAssignmentSubscription = {
+  onCreateAssignment?:  {
+    __typename: "Assignment",
+    id: string,
+    classID: string,
+    name: string,
+    data: string,
+    status: ModelAssignmentStatus,
+    questions?:  {
+      __typename: "ModelQuestionConnection",
+      items?:  Array< {
+        __typename: "Question",
+        id: string,
+        assignmentID: string,
         name: string,
         createdAt: string,
         updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    timeLimit: number,
+    sessions?:  {
+      __typename: "ModelSessionConnection",
+      items?:  Array< {
+        __typename: "Session",
+        id: string,
+        assignmentID: string,
+        name: string,
+        data: string,
+        status: ModelSessionStatus,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateAssignmentSubscription = {
+  onUpdateAssignment?:  {
+    __typename: "Assignment",
+    id: string,
+    classID: string,
+    name: string,
+    data: string,
+    status: ModelAssignmentStatus,
+    questions?:  {
+      __typename: "ModelQuestionConnection",
+      items?:  Array< {
+        __typename: "Question",
+        id: string,
+        assignmentID: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    timeLimit: number,
+    sessions?:  {
+      __typename: "ModelSessionConnection",
+      items?:  Array< {
+        __typename: "Session",
+        id: string,
+        assignmentID: string,
+        name: string,
+        data: string,
+        status: ModelSessionStatus,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteAssignmentSubscription = {
+  onDeleteAssignment?:  {
+    __typename: "Assignment",
+    id: string,
+    classID: string,
+    name: string,
+    data: string,
+    status: ModelAssignmentStatus,
+    questions?:  {
+      __typename: "ModelQuestionConnection",
+      items?:  Array< {
+        __typename: "Question",
+        id: string,
+        assignmentID: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    timeLimit: number,
+    sessions?:  {
+      __typename: "ModelSessionConnection",
+      items?:  Array< {
+        __typename: "Session",
+        id: string,
+        assignmentID: string,
+        name: string,
+        data: string,
+        status: ModelSessionStatus,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateClassStudentSubscription = {
+  onCreateClassStudent?:  {
+    __typename: "ClassStudent",
+    id: string,
+    classID: string,
+    studentID: string,
+    class:  {
+      __typename: "Class",
+      id: string,
+      name: string,
+      code: string,
+      studentLimit: number,
+      status: ModelClassStatus,
+      teacherID: string,
+      subjectID: string,
+      assignments?:  {
+        __typename: "ModelAssignmentConnection",
+        nextToken?: string | null,
       } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
+      students?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateClassStudentSubscription = {
+  onUpdateClassStudent?:  {
+    __typename: "ClassStudent",
+    id: string,
+    classID: string,
+    studentID: string,
+    class:  {
+      __typename: "Class",
+      id: string,
+      name: string,
+      code: string,
+      studentLimit: number,
+      status: ModelClassStatus,
+      teacherID: string,
+      subjectID: string,
+      assignments?:  {
+        __typename: "ModelAssignmentConnection",
+        nextToken?: string | null,
+      } | null,
+      students?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteClassStudentSubscription = {
+  onDeleteClassStudent?:  {
+    __typename: "ClassStudent",
+    id: string,
+    classID: string,
+    studentID: string,
+    class:  {
+      __typename: "Class",
+      id: string,
+      name: string,
+      code: string,
+      studentLimit: number,
+      status: ModelClassStatus,
+      teacherID: string,
+      subjectID: string,
+      assignments?:  {
+        __typename: "ModelAssignmentConnection",
+        nextToken?: string | null,
+      } | null,
+      students?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateClassSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateClassSubscription = {
+  onCreateClass?:  {
+    __typename: "Class",
+    id: string,
+    name: string,
+    code: string,
+    studentLimit: number,
+    status: ModelClassStatus,
+    teacherID: string,
+    subjectID: string,
+    assignments?:  {
+      __typename: "ModelAssignmentConnection",
+      items?:  Array< {
+        __typename: "Assignment",
+        id: string,
+        classID: string,
+        name: string,
+        data: string,
+        status: ModelAssignmentStatus,
+        timeLimit: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
     } | null,
-    content: string,
+    students?:  Array< {
+      __typename: "ClassStudent",
+      id: string,
+      classID: string,
+      studentID: string,
+      class:  {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      student:  {
+        __typename: "Student",
+        id: string,
+        email: string,
+        username: string,
+        first: string,
+        last: string,
+        password: string,
+        role: ModelUserRole,
+        img?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateClassSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateClassSubscription = {
+  onUpdateClass?:  {
+    __typename: "Class",
+    id: string,
+    name: string,
+    code: string,
+    studentLimit: number,
+    status: ModelClassStatus,
+    teacherID: string,
+    subjectID: string,
+    assignments?:  {
+      __typename: "ModelAssignmentConnection",
+      items?:  Array< {
+        __typename: "Assignment",
+        id: string,
+        classID: string,
+        name: string,
+        data: string,
+        status: ModelAssignmentStatus,
+        timeLimit: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    students?:  Array< {
+      __typename: "ClassStudent",
+      id: string,
+      classID: string,
+      studentID: string,
+      class:  {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      student:  {
+        __typename: "Student",
+        id: string,
+        email: string,
+        username: string,
+        first: string,
+        last: string,
+        password: string,
+        role: ModelUserRole,
+        img?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteClassSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteClassSubscription = {
+  onDeleteClass?:  {
+    __typename: "Class",
+    id: string,
+    name: string,
+    code: string,
+    studentLimit: number,
+    status: ModelClassStatus,
+    teacherID: string,
+    subjectID: string,
+    assignments?:  {
+      __typename: "ModelAssignmentConnection",
+      items?:  Array< {
+        __typename: "Assignment",
+        id: string,
+        classID: string,
+        name: string,
+        data: string,
+        status: ModelAssignmentStatus,
+        timeLimit: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    students?:  Array< {
+      __typename: "ClassStudent",
+      id: string,
+      classID: string,
+      studentID: string,
+      class:  {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      student:  {
+        __typename: "Student",
+        id: string,
+        email: string,
+        username: string,
+        first: string,
+        last: string,
+        password: string,
+        role: ModelUserRole,
+        img?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateSessionStudentSubscription = {
+  onCreateSessionStudent?:  {
+    __typename: "SessionStudent",
+    id: string,
+    sessionID: string,
+    studentID: string,
+    scoreID: string,
+    session:  {
+      __typename: "Session",
+      id: string,
+      assignmentID: string,
+      name: string,
+      data: string,
+      status: ModelSessionStatus,
+      students?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    code: ModelSessionStudentCode,
+    score: number,
+    status: ModelSessionStudentStatus,
+    position: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateCommentSubscription = {
-  onUpdateComment?:  {
-    __typename: "Comment",
+export type OnUpdateSessionStudentSubscription = {
+  onUpdateSessionStudent?:  {
+    __typename: "SessionStudent",
     id: string,
-    postID: string,
-    post?:  {
-      __typename: "Post",
+    sessionID: string,
+    studentID: string,
+    scoreID: string,
+    session:  {
+      __typename: "Session",
       id: string,
-      title: string,
-      blogID: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
+      assignmentID: string,
+      name: string,
+      data: string,
+      status: ModelSessionStatus,
+      students?:  {
+        __typename: "ModelSessionStudentConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    content: string,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    code: ModelSessionStudentCode,
+    score: number,
+    status: ModelSessionStudentStatus,
+    position: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteCommentSubscription = {
-  onDeleteComment?:  {
-    __typename: "Comment",
+export type OnDeleteSessionStudentSubscription = {
+  onDeleteSessionStudent?:  {
+    __typename: "SessionStudent",
     id: string,
-    postID: string,
-    post?:  {
-      __typename: "Post",
+    sessionID: string,
+    studentID: string,
+    scoreID: string,
+    session:  {
+      __typename: "Session",
       id: string,
-      title: string,
-      blogID: string,
-      blog?:  {
-        __typename: "Blog",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
+      assignmentID: string,
+      name: string,
+      data: string,
+      status: ModelSessionStatus,
+      students?:  {
+        __typename: "ModelSessionStudentConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    content: string,
+    },
+    student:  {
+      __typename: "Student",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      sessions?:  {
+        __typename: "ModelSessionStudentConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    code: ModelSessionStudentCode,
+    score: number,
+    status: ModelSessionStudentStatus,
+    position: number,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type OnCreateSessionSubscription = {
+  onCreateSession?:  {
+    __typename: "Session",
+    id: string,
+    assignmentID: string,
+    name: string,
+    data: string,
+    status: ModelSessionStatus,
+    students?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateSessionSubscription = {
+  onUpdateSession?:  {
+    __typename: "Session",
+    id: string,
+    assignmentID: string,
+    name: string,
+    data: string,
+    status: ModelSessionStatus,
+    students?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteSessionSubscription = {
+  onDeleteSession?:  {
+    __typename: "Session",
+    id: string,
+    assignmentID: string,
+    name: string,
+    data: string,
+    status: ModelSessionStatus,
+    students?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateSubjectTeacherSubscription = {
+  onCreateSubjectTeacher?:  {
+    __typename: "SubjectTeacher",
+    id: string,
+    subjectID: string,
+    teacherID: string,
+    subject:  {
+      __typename: "Subject",
+      id: string,
+      name: string,
+      code: string,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      teachers?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    teacher:  {
+      __typename: "Teacher",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      suffix?: ModelUserSuffix | null,
+      subjects?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateSubjectTeacherSubscription = {
+  onUpdateSubjectTeacher?:  {
+    __typename: "SubjectTeacher",
+    id: string,
+    subjectID: string,
+    teacherID: string,
+    subject:  {
+      __typename: "Subject",
+      id: string,
+      name: string,
+      code: string,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      teachers?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    teacher:  {
+      __typename: "Teacher",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      suffix?: ModelUserSuffix | null,
+      subjects?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteSubjectTeacherSubscription = {
+  onDeleteSubjectTeacher?:  {
+    __typename: "SubjectTeacher",
+    id: string,
+    subjectID: string,
+    teacherID: string,
+    subject:  {
+      __typename: "Subject",
+      id: string,
+      name: string,
+      code: string,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      teachers?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    teacher:  {
+      __typename: "Teacher",
+      id: string,
+      email: string,
+      username: string,
+      first: string,
+      last: string,
+      password: string,
+      role: ModelUserRole,
+      img?: string | null,
+      classes?:  {
+        __typename: "ModelClassConnection",
+        nextToken?: string | null,
+      } | null,
+      suffix?: ModelUserSuffix | null,
+      subjects?:  {
+        __typename: "ModelSubjectTeacherConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateSubjectSubscription = {
+  onCreateSubject?:  {
+    __typename: "Subject",
+    id: string,
+    name: string,
+    code: string,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    teachers?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateSubjectSubscription = {
+  onUpdateSubject?:  {
+    __typename: "Subject",
+    id: string,
+    name: string,
+    code: string,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    teachers?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteSubjectSubscription = {
+  onDeleteSubject?:  {
+    __typename: "Subject",
+    id: string,
+    name: string,
+    code: string,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    teachers?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateStudentSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateStudentSubscription = {
+  onCreateStudent?:  {
+    __typename: "Student",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassStudentConnection",
+      items?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    sessions?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateStudentSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateStudentSubscription = {
+  onUpdateStudent?:  {
+    __typename: "Student",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassStudentConnection",
+      items?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    sessions?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteStudentSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteStudentSubscription = {
+  onDeleteStudent?:  {
+    __typename: "Student",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassStudentConnection",
+      items?:  Array< {
+        __typename: "ClassStudent",
+        id: string,
+        classID: string,
+        studentID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    sessions?:  {
+      __typename: "ModelSessionStudentConnection",
+      items?:  Array< {
+        __typename: "SessionStudent",
+        id: string,
+        sessionID: string,
+        studentID: string,
+        scoreID: string,
+        code: ModelSessionStudentCode,
+        score: number,
+        status: ModelSessionStudentStatus,
+        position: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateTeacherSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateTeacherSubscription = {
+  onCreateTeacher?:  {
+    __typename: "Teacher",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    suffix?: ModelUserSuffix | null,
+    subjects?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateTeacherSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateTeacherSubscription = {
+  onUpdateTeacher?:  {
+    __typename: "Teacher",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    suffix?: ModelUserSuffix | null,
+    subjects?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteTeacherSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteTeacherSubscription = {
+  onDeleteTeacher?:  {
+    __typename: "Teacher",
+    id: string,
+    email: string,
+    username: string,
+    first: string,
+    last: string,
+    password: string,
+    role: ModelUserRole,
+    img?: string | null,
+    classes?:  {
+      __typename: "ModelClassConnection",
+      items?:  Array< {
+        __typename: "Class",
+        id: string,
+        name: string,
+        code: string,
+        studentLimit: number,
+        status: ModelClassStatus,
+        teacherID: string,
+        subjectID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    suffix?: ModelUserSuffix | null,
+    subjects?:  {
+      __typename: "ModelSubjectTeacherConnection",
+      items?:  Array< {
+        __typename: "SubjectTeacher",
+        id: string,
+        subjectID: string,
+        teacherID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
   } | null,
 };

@@ -2,56 +2,62 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateBlog = /* GraphQL */ `
-  subscription OnCreateBlog {
-    onCreateBlog {
+export const onCreateAnswer = /* GraphQL */ `
+  subscription OnCreateAnswer {
+    onCreateAnswer {
       id
+      questionID
+      label
       name
-      posts {
-        items {
-          id
-          title
-          blogID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      value
+      selected
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateBlog = /* GraphQL */ `
-  subscription OnUpdateBlog {
-    onUpdateBlog {
+export const onUpdateAnswer = /* GraphQL */ `
+  subscription OnUpdateAnswer {
+    onUpdateAnswer {
       id
+      questionID
+      label
       name
-      posts {
-        items {
-          id
-          title
-          blogID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      value
+      selected
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteBlog = /* GraphQL */ `
-  subscription OnDeleteBlog {
-    onDeleteBlog {
+export const onDeleteAnswer = /* GraphQL */ `
+  subscription OnDeleteAnswer {
+    onDeleteAnswer {
       id
+      questionID
+      label
       name
-      posts {
+      value
+      selected
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateQuestion = /* GraphQL */ `
+  subscription OnCreateQuestion {
+    onCreateQuestion {
+      id
+      assignmentID
+      name
+      answers {
         items {
           id
-          title
-          blogID
+          questionID
+          label
+          name
+          value
+          selected
           createdAt
           updatedAt
         }
@@ -62,26 +68,20 @@ export const onDeleteBlog = /* GraphQL */ `
     }
   }
 `;
-export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost {
-    onCreatePost {
+export const onUpdateQuestion = /* GraphQL */ `
+  subscription OnUpdateQuestion {
+    onUpdateQuestion {
       id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
+      assignmentID
+      name
+      answers {
         items {
           id
-          postID
-          content
+          questionID
+          label
+          name
+          value
+          selected
           createdAt
           updatedAt
         }
@@ -92,26 +92,20 @@ export const onCreatePost = /* GraphQL */ `
     }
   }
 `;
-export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost {
-    onUpdatePost {
+export const onDeleteQuestion = /* GraphQL */ `
+  subscription OnDeleteQuestion {
+    onDeleteQuestion {
       id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
+      assignmentID
+      name
+      answers {
         items {
           id
-          postID
-          content
+          questionID
+          label
+          name
+          value
+          selected
           createdAt
           updatedAt
         }
@@ -122,114 +116,1197 @@ export const onUpdatePost = /* GraphQL */ `
     }
   }
 `;
-export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost {
-    onDeletePost {
+export const onCreateAssignment = /* GraphQL */ `
+  subscription OnCreateAssignment {
+    onCreateAssignment {
       id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
+      classID
+      name
+      data
+      status
+      questions {
         items {
           id
-          postID
-          content
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment {
-    onCreateComment {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
-          id
+          assignmentID
           name
           createdAt
           updatedAt
         }
-        comments {
+        nextToken
+      }
+      timeLimit
+      sessions {
+        items {
+          id
+          assignmentID
+          name
+          data
+          status
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateAssignment = /* GraphQL */ `
+  subscription OnUpdateAssignment {
+    onUpdateAssignment {
+      id
+      classID
+      name
+      data
+      status
+      questions {
+        items {
+          id
+          assignmentID
+          name
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      timeLimit
+      sessions {
+        items {
+          id
+          assignmentID
+          name
+          data
+          status
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteAssignment = /* GraphQL */ `
+  subscription OnDeleteAssignment {
+    onDeleteAssignment {
+      id
+      classID
+      name
+      data
+      status
+      questions {
+        items {
+          id
+          assignmentID
+          name
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      timeLimit
+      sessions {
+        items {
+          id
+          assignmentID
+          name
+          data
+          status
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateClassStudent = /* GraphQL */ `
+  subscription OnCreateClassStudent {
+    onCreateClassStudent {
+      id
+      classID
+      studentID
+      class {
+        id
+        name
+        code
+        studentLimit
+        status
+        teacherID
+        subjectID
+        assignments {
+          nextToken
+        }
+        students {
+          id
+          classID
+          studentID
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      student {
+        id
+        email
+        username
+        first
+        last
+        password
+        role
+        img
+        classes {
+          nextToken
+        }
+        sessions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateClassStudent = /* GraphQL */ `
+  subscription OnUpdateClassStudent {
+    onUpdateClassStudent {
+      id
+      classID
+      studentID
+      class {
+        id
+        name
+        code
+        studentLimit
+        status
+        teacherID
+        subjectID
+        assignments {
+          nextToken
+        }
+        students {
+          id
+          classID
+          studentID
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      student {
+        id
+        email
+        username
+        first
+        last
+        password
+        role
+        img
+        classes {
+          nextToken
+        }
+        sessions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteClassStudent = /* GraphQL */ `
+  subscription OnDeleteClassStudent {
+    onDeleteClassStudent {
+      id
+      classID
+      studentID
+      class {
+        id
+        name
+        code
+        studentLimit
+        status
+        teacherID
+        subjectID
+        assignments {
+          nextToken
+        }
+        students {
+          id
+          classID
+          studentID
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      student {
+        id
+        email
+        username
+        first
+        last
+        password
+        role
+        img
+        classes {
+          nextToken
+        }
+        sessions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateClass = /* GraphQL */ `
+  subscription OnCreateClass($owner: String) {
+    onCreateClass(owner: $owner) {
+      id
+      name
+      code
+      studentLimit
+      status
+      teacherID
+      subjectID
+      assignments {
+        items {
+          id
+          classID
+          name
+          data
+          status
+          timeLimit
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      students {
+        id
+        classID
+        studentID
+        class {
+          id
+          name
+          code
+          studentLimit
+          status
+          teacherID
+          subjectID
+          createdAt
+          updatedAt
+          owner
+        }
+        student {
+          id
+          email
+          username
+          first
+          last
+          password
+          role
+          img
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateClass = /* GraphQL */ `
+  subscription OnUpdateClass($owner: String) {
+    onUpdateClass(owner: $owner) {
+      id
+      name
+      code
+      studentLimit
+      status
+      teacherID
+      subjectID
+      assignments {
+        items {
+          id
+          classID
+          name
+          data
+          status
+          timeLimit
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      students {
+        id
+        classID
+        studentID
+        class {
+          id
+          name
+          code
+          studentLimit
+          status
+          teacherID
+          subjectID
+          createdAt
+          updatedAt
+          owner
+        }
+        student {
+          id
+          email
+          username
+          first
+          last
+          password
+          role
+          img
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteClass = /* GraphQL */ `
+  subscription OnDeleteClass($owner: String) {
+    onDeleteClass(owner: $owner) {
+      id
+      name
+      code
+      studentLimit
+      status
+      teacherID
+      subjectID
+      assignments {
+        items {
+          id
+          classID
+          name
+          data
+          status
+          timeLimit
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      students {
+        id
+        classID
+        studentID
+        class {
+          id
+          name
+          code
+          studentLimit
+          status
+          teacherID
+          subjectID
+          createdAt
+          updatedAt
+          owner
+        }
+        student {
+          id
+          email
+          username
+          first
+          last
+          password
+          role
+          img
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateSessionStudent = /* GraphQL */ `
+  subscription OnCreateSessionStudent {
+    onCreateSessionStudent {
+      id
+      sessionID
+      studentID
+      scoreID
+      session {
+        id
+        assignmentID
+        name
+        data
+        status
+        students {
           nextToken
         }
         createdAt
         updatedAt
       }
-      content
+      student {
+        id
+        email
+        username
+        first
+        last
+        password
+        role
+        img
+        classes {
+          nextToken
+        }
+        sessions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      code
+      score
+      status
+      position
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment {
-    onUpdateComment {
+export const onUpdateSessionStudent = /* GraphQL */ `
+  subscription OnUpdateSessionStudent {
+    onUpdateSessionStudent {
       id
-      postID
-      post {
+      sessionID
+      studentID
+      scoreID
+      session {
         id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
+        assignmentID
+        name
+        data
+        status
+        students {
           nextToken
         }
         createdAt
         updatedAt
       }
-      content
+      student {
+        id
+        email
+        username
+        first
+        last
+        password
+        role
+        img
+        classes {
+          nextToken
+        }
+        sessions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      code
+      score
+      status
+      position
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment {
-    onDeleteComment {
+export const onDeleteSessionStudent = /* GraphQL */ `
+  subscription OnDeleteSessionStudent {
+    onDeleteSessionStudent {
       id
-      postID
-      post {
+      sessionID
+      studentID
+      scoreID
+      session {
         id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
+        assignmentID
+        name
+        data
+        status
+        students {
           nextToken
         }
         createdAt
         updatedAt
       }
-      content
+      student {
+        id
+        email
+        username
+        first
+        last
+        password
+        role
+        img
+        classes {
+          nextToken
+        }
+        sessions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      code
+      score
+      status
+      position
       createdAt
       updatedAt
+    }
+  }
+`;
+export const onCreateSession = /* GraphQL */ `
+  subscription OnCreateSession {
+    onCreateSession {
+      id
+      assignmentID
+      name
+      data
+      status
+      students {
+        items {
+          id
+          sessionID
+          studentID
+          scoreID
+          code
+          score
+          status
+          position
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSession = /* GraphQL */ `
+  subscription OnUpdateSession {
+    onUpdateSession {
+      id
+      assignmentID
+      name
+      data
+      status
+      students {
+        items {
+          id
+          sessionID
+          studentID
+          scoreID
+          code
+          score
+          status
+          position
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSession = /* GraphQL */ `
+  subscription OnDeleteSession {
+    onDeleteSession {
+      id
+      assignmentID
+      name
+      data
+      status
+      students {
+        items {
+          id
+          sessionID
+          studentID
+          scoreID
+          code
+          score
+          status
+          position
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateSubjectTeacher = /* GraphQL */ `
+  subscription OnCreateSubjectTeacher {
+    onCreateSubjectTeacher {
+      id
+      subjectID
+      teacherID
+      subject {
+        id
+        name
+        code
+        classes {
+          nextToken
+        }
+        teachers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teacher {
+        id
+        email
+        username
+        first
+        last
+        password
+        role
+        img
+        classes {
+          nextToken
+        }
+        suffix
+        subjects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateSubjectTeacher = /* GraphQL */ `
+  subscription OnUpdateSubjectTeacher {
+    onUpdateSubjectTeacher {
+      id
+      subjectID
+      teacherID
+      subject {
+        id
+        name
+        code
+        classes {
+          nextToken
+        }
+        teachers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teacher {
+        id
+        email
+        username
+        first
+        last
+        password
+        role
+        img
+        classes {
+          nextToken
+        }
+        suffix
+        subjects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteSubjectTeacher = /* GraphQL */ `
+  subscription OnDeleteSubjectTeacher {
+    onDeleteSubjectTeacher {
+      id
+      subjectID
+      teacherID
+      subject {
+        id
+        name
+        code
+        classes {
+          nextToken
+        }
+        teachers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teacher {
+        id
+        email
+        username
+        first
+        last
+        password
+        role
+        img
+        classes {
+          nextToken
+        }
+        suffix
+        subjects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateSubject = /* GraphQL */ `
+  subscription OnCreateSubject {
+    onCreateSubject {
+      id
+      name
+      code
+      classes {
+        items {
+          id
+          name
+          code
+          studentLimit
+          status
+          teacherID
+          subjectID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      teachers {
+        items {
+          id
+          subjectID
+          teacherID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSubject = /* GraphQL */ `
+  subscription OnUpdateSubject {
+    onUpdateSubject {
+      id
+      name
+      code
+      classes {
+        items {
+          id
+          name
+          code
+          studentLimit
+          status
+          teacherID
+          subjectID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      teachers {
+        items {
+          id
+          subjectID
+          teacherID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSubject = /* GraphQL */ `
+  subscription OnDeleteSubject {
+    onDeleteSubject {
+      id
+      name
+      code
+      classes {
+        items {
+          id
+          name
+          code
+          studentLimit
+          status
+          teacherID
+          subjectID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      teachers {
+        items {
+          id
+          subjectID
+          teacherID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateStudent = /* GraphQL */ `
+  subscription OnCreateStudent($owner: String) {
+    onCreateStudent(owner: $owner) {
+      id
+      email
+      username
+      first
+      last
+      password
+      role
+      img
+      classes {
+        items {
+          id
+          classID
+          studentID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      sessions {
+        items {
+          id
+          sessionID
+          studentID
+          scoreID
+          code
+          score
+          status
+          position
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateStudent = /* GraphQL */ `
+  subscription OnUpdateStudent($owner: String) {
+    onUpdateStudent(owner: $owner) {
+      id
+      email
+      username
+      first
+      last
+      password
+      role
+      img
+      classes {
+        items {
+          id
+          classID
+          studentID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      sessions {
+        items {
+          id
+          sessionID
+          studentID
+          scoreID
+          code
+          score
+          status
+          position
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteStudent = /* GraphQL */ `
+  subscription OnDeleteStudent($owner: String) {
+    onDeleteStudent(owner: $owner) {
+      id
+      email
+      username
+      first
+      last
+      password
+      role
+      img
+      classes {
+        items {
+          id
+          classID
+          studentID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      sessions {
+        items {
+          id
+          sessionID
+          studentID
+          scoreID
+          code
+          score
+          status
+          position
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateTeacher = /* GraphQL */ `
+  subscription OnCreateTeacher($owner: String) {
+    onCreateTeacher(owner: $owner) {
+      id
+      email
+      username
+      first
+      last
+      password
+      role
+      img
+      classes {
+        items {
+          id
+          name
+          code
+          studentLimit
+          status
+          teacherID
+          subjectID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      suffix
+      subjects {
+        items {
+          id
+          subjectID
+          teacherID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateTeacher = /* GraphQL */ `
+  subscription OnUpdateTeacher($owner: String) {
+    onUpdateTeacher(owner: $owner) {
+      id
+      email
+      username
+      first
+      last
+      password
+      role
+      img
+      classes {
+        items {
+          id
+          name
+          code
+          studentLimit
+          status
+          teacherID
+          subjectID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      suffix
+      subjects {
+        items {
+          id
+          subjectID
+          teacherID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteTeacher = /* GraphQL */ `
+  subscription OnDeleteTeacher($owner: String) {
+    onDeleteTeacher(owner: $owner) {
+      id
+      email
+      username
+      first
+      last
+      password
+      role
+      img
+      classes {
+        items {
+          id
+          name
+          code
+          studentLimit
+          status
+          teacherID
+          subjectID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      suffix
+      subjects {
+        items {
+          id
+          subjectID
+          teacherID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;

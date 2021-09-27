@@ -1,6 +1,12 @@
 type SubjectTeacher @model(queries: null)
 @key(name: "bySubject", fields: ["subjectID", "teacherID"])
 @key(name: "byTeacher", fields: ["teacherID", "subjectID"])
+@auth(rules: [
+  { allow: groups, groups: ["Admin"] },
+  { allow: groups, groups: ["Teachers"], operations: [create, read] },
+  { allow: owner, operations: [delete] }
+  { allow: groups, groups: ["Students"], operations: [read] }
+])
 {
   id: ID!
   subjectID: ID!
@@ -9,7 +15,12 @@ type SubjectTeacher @model(queries: null)
   teacher: Teacher! @connection(fields: ["teacherID"])
 }
 
-type Subject @model {
+type Subject @model 
+@auth(rules: [
+  { allow: groups, groups: ["Admin"] },
+  { allow: groups, groups: ["Teachers", "Students"], operations: [read]}
+])
+{
   id: ID!
   name: String!
   code: String!

@@ -20,6 +20,12 @@ type Question @model
 
 type Assignment @model
 @key(name: "byClass", fields: ["classID", "id"])
+@auth(rules: [
+  { allow: groups, groups: ["Admin"] },
+  { allow: groups, groups: ["Teachers"], operations: [create, read] },
+  { allow: owner, operations: [update,delete] },
+  { allow: groups, groups: ["Students"] }
+])
 {
   id: ID!
   classID: ID!

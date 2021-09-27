@@ -1,9 +1,8 @@
 name: Expo Publish
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 jobs:
   publish:
     name: Install and publish
@@ -17,5 +16,5 @@ jobs:
         with:
           expo-version: 4.x
           token: ${{ secrets.EXPO_TOKEN }}
-      - run: npm install
+      - run: yarn install
       - run: expo publish
