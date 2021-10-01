@@ -147,6 +147,7 @@ export const onCreateAssignment = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -184,6 +185,7 @@ export const onUpdateAssignment = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -221,6 +223,7 @@ export const onDeleteAssignment = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -245,13 +248,9 @@ export const onCreateClassStudent = /* GraphQL */ `
           nextToken
         }
         students {
-          id
-          classID
-          studentID
-          createdAt
-          updatedAt
-          owner
+          nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -263,18 +262,19 @@ export const onCreateClassStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -299,13 +299,9 @@ export const onUpdateClassStudent = /* GraphQL */ `
           nextToken
         }
         students {
-          id
-          classID
-          studentID
-          createdAt
-          updatedAt
-          owner
+          nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -317,18 +313,19 @@ export const onUpdateClassStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -353,13 +350,9 @@ export const onDeleteClassStudent = /* GraphQL */ `
           nextToken
         }
         students {
-          id
-          classID
-          studentID
-          createdAt
-          updatedAt
-          owner
+          nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -371,18 +364,19 @@ export const onDeleteClassStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -407,6 +401,7 @@ export const onCreateClass = /* GraphQL */ `
           data
           status
           timeLimit
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -414,38 +409,18 @@ export const onCreateClass = /* GraphQL */ `
         nextToken
       }
       students {
-        id
-        classID
-        studentID
-        class {
+        items {
           id
-          name
-          code
-          studentLimit
-          status
-          teacherID
-          subjectID
+          classID
+          studentID
+          isDeleted
           createdAt
           updatedAt
           owner
         }
-        student {
-          id
-          email
-          username
-          first
-          last
-          password
-          role
-          img
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -470,6 +445,7 @@ export const onUpdateClass = /* GraphQL */ `
           data
           status
           timeLimit
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -477,38 +453,18 @@ export const onUpdateClass = /* GraphQL */ `
         nextToken
       }
       students {
-        id
-        classID
-        studentID
-        class {
+        items {
           id
-          name
-          code
-          studentLimit
-          status
-          teacherID
-          subjectID
+          classID
+          studentID
+          isDeleted
           createdAt
           updatedAt
           owner
         }
-        student {
-          id
-          email
-          username
-          first
-          last
-          password
-          role
-          img
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -533,6 +489,7 @@ export const onDeleteClass = /* GraphQL */ `
           data
           status
           timeLimit
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -540,38 +497,18 @@ export const onDeleteClass = /* GraphQL */ `
         nextToken
       }
       students {
-        id
-        classID
-        studentID
-        class {
+        items {
           id
-          name
-          code
-          studentLimit
-          status
-          teacherID
-          subjectID
+          classID
+          studentID
+          isDeleted
           createdAt
           updatedAt
           owner
         }
-        student {
-          id
-          email
-          username
-          first
-          last
-          password
-          role
-          img
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -604,14 +541,14 @@ export const onCreateSessionStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -651,14 +588,14 @@ export const onUpdateSessionStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -698,14 +635,14 @@ export const onDeleteSessionStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -803,141 +740,6 @@ export const onDeleteSession = /* GraphQL */ `
     }
   }
 `;
-export const onCreateSubjectTeacher = /* GraphQL */ `
-  subscription OnCreateSubjectTeacher {
-    onCreateSubjectTeacher {
-      id
-      subjectID
-      teacherID
-      subject {
-        id
-        name
-        code
-        classes {
-          nextToken
-        }
-        teachers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teacher {
-        id
-        email
-        username
-        first
-        last
-        password
-        role
-        img
-        classes {
-          nextToken
-        }
-        suffix
-        subjects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateSubjectTeacher = /* GraphQL */ `
-  subscription OnUpdateSubjectTeacher {
-    onUpdateSubjectTeacher {
-      id
-      subjectID
-      teacherID
-      subject {
-        id
-        name
-        code
-        classes {
-          nextToken
-        }
-        teachers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teacher {
-        id
-        email
-        username
-        first
-        last
-        password
-        role
-        img
-        classes {
-          nextToken
-        }
-        suffix
-        subjects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteSubjectTeacher = /* GraphQL */ `
-  subscription OnDeleteSubjectTeacher {
-    onDeleteSubjectTeacher {
-      id
-      subjectID
-      teacherID
-      subject {
-        id
-        name
-        code
-        classes {
-          nextToken
-        }
-        teachers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teacher {
-        id
-        email
-        username
-        first
-        last
-        password
-        role
-        img
-        classes {
-          nextToken
-        }
-        suffix
-        subjects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
 export const onCreateSubject = /* GraphQL */ `
   subscription OnCreateSubject {
     onCreateSubject {
@@ -953,17 +755,7 @@ export const onCreateSubject = /* GraphQL */ `
           status
           teacherID
           subjectID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      teachers {
-        items {
-          id
-          subjectID
-          teacherID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -990,17 +782,7 @@ export const onUpdateSubject = /* GraphQL */ `
           status
           teacherID
           subjectID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      teachers {
-        items {
-          id
-          subjectID
-          teacherID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1027,17 +809,7 @@ export const onDeleteSubject = /* GraphQL */ `
           status
           teacherID
           subjectID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      teachers {
-        items {
-          id
-          subjectID
-          teacherID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1058,13 +830,13 @@ export const onCreateStudent = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
           classID
           studentID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1086,6 +858,7 @@ export const onCreateStudent = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -1101,13 +874,13 @@ export const onUpdateStudent = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
           classID
           studentID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1129,6 +902,7 @@ export const onUpdateStudent = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -1144,13 +918,13 @@ export const onDeleteStudent = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
           classID
           studentID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1172,6 +946,7 @@ export const onDeleteStudent = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -1187,8 +962,7 @@ export const onCreateTeacher = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
@@ -1198,6 +972,7 @@ export const onCreateTeacher = /* GraphQL */ `
           status
           teacherID
           subjectID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1205,17 +980,7 @@ export const onCreateTeacher = /* GraphQL */ `
         nextToken
       }
       suffix
-      subjects {
-        items {
-          id
-          subjectID
-          teacherID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -1231,8 +996,7 @@ export const onUpdateTeacher = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
@@ -1242,6 +1006,7 @@ export const onUpdateTeacher = /* GraphQL */ `
           status
           teacherID
           subjectID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1249,17 +1014,7 @@ export const onUpdateTeacher = /* GraphQL */ `
         nextToken
       }
       suffix
-      subjects {
-        items {
-          id
-          subjectID
-          teacherID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -1275,8 +1030,7 @@ export const onDeleteTeacher = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
@@ -1286,6 +1040,7 @@ export const onDeleteTeacher = /* GraphQL */ `
           status
           teacherID
           subjectID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1293,17 +1048,7 @@ export const onDeleteTeacher = /* GraphQL */ `
         nextToken
       }
       suffix
-      subjects {
-        items {
-          id
-          subjectID
-          teacherID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      isDeleted
       createdAt
       updatedAt
       owner

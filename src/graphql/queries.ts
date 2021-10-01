@@ -113,6 +113,7 @@ export const getAssignment = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -139,6 +140,7 @@ export const listAssignments = /* GraphQL */ `
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -165,6 +167,7 @@ export const getClass = /* GraphQL */ `
           data
           status
           timeLimit
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -172,38 +175,18 @@ export const getClass = /* GraphQL */ `
         nextToken
       }
       students {
-        id
-        classID
-        studentID
-        class {
+        items {
           id
-          name
-          code
-          studentLimit
-          status
-          teacherID
-          subjectID
+          classID
+          studentID
+          isDeleted
           createdAt
           updatedAt
           owner
         }
-        student {
-          id
-          email
-          username
-          first
-          last
-          password
-          role
-          img
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -229,13 +212,9 @@ export const listClasses = /* GraphQL */ `
           nextToken
         }
         students {
-          id
-          classID
-          studentID
-          createdAt
-          updatedAt
-          owner
+          nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -310,17 +289,7 @@ export const getSubject = /* GraphQL */ `
           status
           teacherID
           subjectID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      teachers {
-        items {
-          id
-          subjectID
-          teacherID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -346,9 +315,6 @@ export const listSubjects = /* GraphQL */ `
         classes {
           nextToken
         }
-        teachers {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -365,13 +331,13 @@ export const getStudent = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
           classID
           studentID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -393,6 +359,7 @@ export const getStudent = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -413,14 +380,14 @@ export const listStudents = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -438,8 +405,7 @@ export const getTeacher = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
@@ -449,6 +415,7 @@ export const getTeacher = /* GraphQL */ `
           status
           teacherID
           subjectID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -456,17 +423,7 @@ export const getTeacher = /* GraphQL */ `
         nextToken
       }
       suffix
-      subjects {
-        items {
-          id
-          subjectID
-          teacherID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -487,15 +444,12 @@ export const listTeachers = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         suffix
-        subjects {
-          nextToken
-        }
+        isDeleted
         createdAt
         updatedAt
         owner

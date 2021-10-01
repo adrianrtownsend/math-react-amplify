@@ -12,10 +12,10 @@ type Student @model
   first: String!
   last: String!
   password: String!
-  role: ModelUserRole! # set default on creation
-  img: String # double check property type
+  image: String # double check property type
   classes: [ClassStudent] @connection(keyName: "byStudent", fields: ["id"])
   sessions: [SessionStudent] @connection(keyName: "byStudent", fields: ["id"])
+  isDeleted: Boolean!
 }
 
 type Teacher @model 
@@ -33,16 +33,10 @@ type Teacher @model
   first: String!
   last: String!
   password: String!
-  role: ModelUserRole! # set default on creation
-  img: String # double check property type
+  image: String # double check property type
   classes: [Class] @connection(keyName: "byTeacher", fields: ["id"])
   suffix: ModelUserSuffix # required(role=teacher)
-  subjects: [SubjectTeacher] @connection(keyName: "byTeacher", fields: ["id"])
-}
-
-enum ModelUserRole {
-  teacher
-  student
+  isDeleted: Boolean!
 }
 
 enum ModelUserSuffix {
@@ -50,3 +44,5 @@ enum ModelUserSuffix {
   Mrs
   Ms
 }
+
+# Custom Mutations

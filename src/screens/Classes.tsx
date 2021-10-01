@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Box } from 'native-base';
 
-const Class = () => {
+const ClassesScreen = () => {
 
   const [state, setstate] = useState()
 
@@ -22,4 +22,4 @@ const Class = () => {
   );
 };
 
-export default Class;
+export default ClassesScreen;

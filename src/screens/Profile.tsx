@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { Avatar, Center, CheckIcon, Divider, FlatList, Flex, Heading, HStack, NativeBaseProvider, Text, Box, ScrollView, Stack, VStack, Pressable, Image } from 'native-base'
 

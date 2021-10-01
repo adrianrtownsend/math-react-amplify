@@ -1,45 +1,29 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {
-  NativeBaseProvider,
-  Box,
-  HStack,
-  VStack,
-  Text,
-  Pressable,
-  Image,
-} from 'native-base';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import ProfileScreen from '../screens/Profile';
-import { Auth } from 'aws-amplify';
-import { Button } from 'react-native';
+import ClassesScreen from '../screens/Classes'
+import ClassScreen from '../screens/Class'
+import AssignmentScreen from '../screens/Assignment'
+import ProfileScreen from '../screens/Profile'
 
-const signOut = async () => {
-  try {
-    await Auth.signOut()
-  } catch(error) {
-    console.log('error signing out: ', error)
-  }
-}
+// Classes Navigator
+const ClassesStack = createNativeStackNavigator()
+const ClassesStackNavigator = () => (
+  <ClassesStack.Navigator screenOptions={{ headerShown: false }}>
+    <ClassesStack.Screen name="Classes" component={ClassesScreen} />
+    <ClassesStack.Screen name="Class" component={ClassScreen} />
+    <ClassesStack.Screen name="Assignment" component={AssignmentScreen} />
+  </ClassesStack.Navigator>
+)
 
-function HomeScreen() {
-  return (
-    <Box flex={1} bg="#fff" alignItems="center" justifyContent="center">
-      <Button onPress={()=> signOut()}>
-          Sign Out
-      </Button>
-      <Text>Open up App.js to start working on your app!</Text>
-    </Box>
-  );
-}
+// Classes & Profile
+const RootTab = createBottomTabNavigator()
+const RootTabNavigator = () => (
+  <RootTab.Navigator screenOptions={{ headerShown: false }}>
+    <RootTab.Screen name="Classes" component={ClassesStackNavigator} />
+    <RootTab.Screen name="Profile" component={ProfileScreen} />
+  </RootTab.Navigator>
+)
 
-const Tab = createBottomTabNavigator();
-
-const TabNavigator = () => (
-  <Tab.Navigator screenOptions={{ headerShown: false }}>
-    <Tab.Screen name="Home" component={HomeScreen} />
-    <Tab.Screen name="Profile" component={ProfileScreen} />
-  </Tab.Navigator>
-);
-
-export default TabNavigator;
+export default RootTabNavigator;

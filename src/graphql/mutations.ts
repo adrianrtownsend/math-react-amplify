@@ -168,6 +168,7 @@ export const createAssignment = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -208,6 +209,7 @@ export const updateAssignment = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -248,6 +250,7 @@ export const deleteAssignment = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -275,13 +278,9 @@ export const createClassStudent = /* GraphQL */ `
           nextToken
         }
         students {
-          id
-          classID
-          studentID
-          createdAt
-          updatedAt
-          owner
+          nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -293,18 +292,19 @@ export const createClassStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -332,13 +332,9 @@ export const updateClassStudent = /* GraphQL */ `
           nextToken
         }
         students {
-          id
-          classID
-          studentID
-          createdAt
-          updatedAt
-          owner
+          nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -350,18 +346,19 @@ export const updateClassStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -389,13 +386,9 @@ export const deleteClassStudent = /* GraphQL */ `
           nextToken
         }
         students {
-          id
-          classID
-          studentID
-          createdAt
-          updatedAt
-          owner
+          nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -407,18 +400,19 @@ export const deleteClassStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -446,6 +440,7 @@ export const createClass = /* GraphQL */ `
           data
           status
           timeLimit
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -453,38 +448,18 @@ export const createClass = /* GraphQL */ `
         nextToken
       }
       students {
-        id
-        classID
-        studentID
-        class {
+        items {
           id
-          name
-          code
-          studentLimit
-          status
-          teacherID
-          subjectID
+          classID
+          studentID
+          isDeleted
           createdAt
           updatedAt
           owner
         }
-        student {
-          id
-          email
-          username
-          first
-          last
-          password
-          role
-          img
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -512,6 +487,7 @@ export const updateClass = /* GraphQL */ `
           data
           status
           timeLimit
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -519,38 +495,18 @@ export const updateClass = /* GraphQL */ `
         nextToken
       }
       students {
-        id
-        classID
-        studentID
-        class {
+        items {
           id
-          name
-          code
-          studentLimit
-          status
-          teacherID
-          subjectID
+          classID
+          studentID
+          isDeleted
           createdAt
           updatedAt
           owner
         }
-        student {
-          id
-          email
-          username
-          first
-          last
-          password
-          role
-          img
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -578,6 +534,7 @@ export const deleteClass = /* GraphQL */ `
           data
           status
           timeLimit
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -585,38 +542,18 @@ export const deleteClass = /* GraphQL */ `
         nextToken
       }
       students {
-        id
-        classID
-        studentID
-        class {
+        items {
           id
-          name
-          code
-          studentLimit
-          status
-          teacherID
-          subjectID
+          classID
+          studentID
+          isDeleted
           createdAt
           updatedAt
           owner
         }
-        student {
-          id
-          email
-          username
-          first
-          last
-          password
-          role
-          img
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -652,14 +589,14 @@ export const createSessionStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -702,14 +639,14 @@ export const updateSessionStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -752,14 +689,14 @@ export const deleteSessionStudent = /* GraphQL */ `
         first
         last
         password
-        role
-        img
+        image
         classes {
           nextToken
         }
         sessions {
           nextToken
         }
+        isDeleted
         createdAt
         updatedAt
         owner
@@ -866,150 +803,6 @@ export const deleteSession = /* GraphQL */ `
     }
   }
 `;
-export const createSubjectTeacher = /* GraphQL */ `
-  mutation CreateSubjectTeacher(
-    $input: CreateSubjectTeacherInput!
-    $condition: ModelSubjectTeacherConditionInput
-  ) {
-    createSubjectTeacher(input: $input, condition: $condition) {
-      id
-      subjectID
-      teacherID
-      subject {
-        id
-        name
-        code
-        classes {
-          nextToken
-        }
-        teachers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teacher {
-        id
-        email
-        username
-        first
-        last
-        password
-        role
-        img
-        classes {
-          nextToken
-        }
-        suffix
-        subjects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateSubjectTeacher = /* GraphQL */ `
-  mutation UpdateSubjectTeacher(
-    $input: UpdateSubjectTeacherInput!
-    $condition: ModelSubjectTeacherConditionInput
-  ) {
-    updateSubjectTeacher(input: $input, condition: $condition) {
-      id
-      subjectID
-      teacherID
-      subject {
-        id
-        name
-        code
-        classes {
-          nextToken
-        }
-        teachers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teacher {
-        id
-        email
-        username
-        first
-        last
-        password
-        role
-        img
-        classes {
-          nextToken
-        }
-        suffix
-        subjects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteSubjectTeacher = /* GraphQL */ `
-  mutation DeleteSubjectTeacher(
-    $input: DeleteSubjectTeacherInput!
-    $condition: ModelSubjectTeacherConditionInput
-  ) {
-    deleteSubjectTeacher(input: $input, condition: $condition) {
-      id
-      subjectID
-      teacherID
-      subject {
-        id
-        name
-        code
-        classes {
-          nextToken
-        }
-        teachers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teacher {
-        id
-        email
-        username
-        first
-        last
-        password
-        role
-        img
-        classes {
-          nextToken
-        }
-        suffix
-        subjects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
 export const createSubject = /* GraphQL */ `
   mutation CreateSubject(
     $input: CreateSubjectInput!
@@ -1028,17 +821,7 @@ export const createSubject = /* GraphQL */ `
           status
           teacherID
           subjectID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      teachers {
-        items {
-          id
-          subjectID
-          teacherID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1068,17 +851,7 @@ export const updateSubject = /* GraphQL */ `
           status
           teacherID
           subjectID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      teachers {
-        items {
-          id
-          subjectID
-          teacherID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1108,17 +881,7 @@ export const deleteSubject = /* GraphQL */ `
           status
           teacherID
           subjectID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      teachers {
-        items {
-          id
-          subjectID
-          teacherID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1142,13 +905,13 @@ export const createStudent = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
           classID
           studentID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1170,6 +933,7 @@ export const createStudent = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -1188,13 +952,13 @@ export const updateStudent = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
           classID
           studentID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1216,6 +980,7 @@ export const updateStudent = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -1234,13 +999,13 @@ export const deleteStudent = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
           classID
           studentID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1262,6 +1027,7 @@ export const deleteStudent = /* GraphQL */ `
         }
         nextToken
       }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -1280,8 +1046,7 @@ export const createTeacher = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
@@ -1291,6 +1056,7 @@ export const createTeacher = /* GraphQL */ `
           status
           teacherID
           subjectID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1298,17 +1064,7 @@ export const createTeacher = /* GraphQL */ `
         nextToken
       }
       suffix
-      subjects {
-        items {
-          id
-          subjectID
-          teacherID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -1327,8 +1083,7 @@ export const updateTeacher = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
@@ -1338,6 +1093,7 @@ export const updateTeacher = /* GraphQL */ `
           status
           teacherID
           subjectID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1345,17 +1101,7 @@ export const updateTeacher = /* GraphQL */ `
         nextToken
       }
       suffix
-      subjects {
-        items {
-          id
-          subjectID
-          teacherID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      isDeleted
       createdAt
       updatedAt
       owner
@@ -1374,8 +1120,7 @@ export const deleteTeacher = /* GraphQL */ `
       first
       last
       password
-      role
-      img
+      image
       classes {
         items {
           id
@@ -1385,6 +1130,7 @@ export const deleteTeacher = /* GraphQL */ `
           status
           teacherID
           subjectID
+          isDeleted
           createdAt
           updatedAt
           owner
@@ -1392,17 +1138,7 @@ export const deleteTeacher = /* GraphQL */ `
         nextToken
       }
       suffix
-      subjects {
-        items {
-          id
-          subjectID
-          teacherID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      isDeleted
       createdAt
       updatedAt
       owner

@@ -12,6 +12,7 @@ type ClassStudent @model(queries: null)
   studentID: ID!
   class: Class! @connection(fields: ["classID"])
   student: Student! @connection(fields: ["studentID"])
+  isDeleted: Boolean!
 }
 
 type Class @model
@@ -20,8 +21,8 @@ type Class @model
 @auth(rules: [
   { allow: groups, groups: ["Admin"] },
   { allow: owner },
-  { allow: groups, groups: ["Teachers"], operations: [create, read]}
-  { allow: groups, groups: ["Students"], operations: [read]}
+  { allow: groups, groups: ["Teachers"], operations: [create, read] }
+  { allow: groups, groups: ["Students"], operations: [read] }
 ]) 
 {
   id: ID!
@@ -32,7 +33,8 @@ type Class @model
   teacherID: ID!
   subjectID: ID!
   assignments: [Assignment] @connection(keyName: "byClass", fields: ["id"])
-  students: [ClassStudent]
+  students: [ClassStudent] @connection(keyName: "byClass", fields: ["id"])
+  isDeleted: Boolean!
 }
 
 
@@ -42,3 +44,5 @@ enum ModelClassStatus {
   active
   closed
 }
+
+# Custom Mutations

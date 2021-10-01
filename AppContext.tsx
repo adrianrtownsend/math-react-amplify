@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, createContext, useMemo } from "react";
 //import * as SecureStore from 'expo-secure-store';
 
-import { Amplify, Auth, API, graphqlOperation } from 'aws-amplify';
+import { Amplify, Auth, API, Cache, graphqlOperation } from 'aws-amplify';
 //import * as subscriptions from './graphql/subscriptions';
 
 interface IState {

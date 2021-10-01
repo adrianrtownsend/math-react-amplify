@@ -35,6 +35,7 @@ type Assignment @model
   questions: [Question]! @connection(keyName: "byAssignment", fields: ["id"])
   timeLimit: Int! #same unit as timestamp
   sessions: [Session] @connection(keyName: "byAssignment", fields: ["id"])
+  isDeleted: Boolean!
 }
 
 enum ModelAssignmentStatus {
