@@ -2,9 +2,9 @@
 import React, { useState } from 'react'
 
 // Styling
-import { Select as NbSelect, Icon, VStack, CheckIcon } from 'native-base'
+import { Select as NbSelect, CheckIcon } from 'native-base'
 
-export const Select = (props) => {
+const Select = (props) => {
 
   const [item, setItem] = useState('0')
 
@@ -14,7 +14,6 @@ export const Select = (props) => {
 
   return (
     <NbSelect
-      minWidth="200"
       selectedValue={item}
       _selectedItem={{
         bg: "teal.600",
@@ -25,3 +24,5 @@ export const Select = (props) => {
     >{items}</NbSelect>
   )
 }
+
+export default Select

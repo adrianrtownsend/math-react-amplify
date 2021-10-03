@@ -1,27 +1,15 @@
-import React, { useEffect, useReducer, createContext, useMemo } from "react";
-//import * as SecureStore from 'expo-secure-store';
+import React, { useEffect, useReducer, createContext, useMemo } from 'react'
+//import * as SecureStore from 'expo-secure-store'
 
-import { Amplify, Auth, API, Cache, graphqlOperation } from 'aws-amplify';
-//import * as subscriptions from './graphql/subscriptions';
+import { Amplify, Auth, API, Cache, graphqlOperation } from 'aws-amplify'
 
-interface IState {
-  user: object | null;
-  loading: boolean;
-}
+import { IAction, IAppContext, IAuthActionData, IApiActionData, IState } from './types'
 
-interface IDispatchContext {
-  test: Function;
-}
+import * as Test from './testData.json'
 
-interface IAppContext {
-  dispatchContext: IDispatchContext;
-  state: IState;
-}
-
-interface IAction {
-  type: string;
-  payload?: any;
-}
+import * as queries from './src/graphql/queries'
+import * as mutations from './src/graphql/mutations'
+import * as subscriptions from './src/graphql/subscriptions'
 
 const initialState: IState = {
   user: null,
@@ -39,7 +27,7 @@ const reducer = (prevState: IState, action: IAction) => {
     case 'SIGN_OUT':
       return initialState
     case 'TEST':
-      console.log('testing')
+      console.log('testing: ', action.payload)
       return ({...prevState})
     case 'AUTH_CURRENT_USER':
       console.log('logged in user: ', action.payload.user)
@@ -60,33 +48,48 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     dispatch({type: 'IS_LOADED'})
-
-    /*Auth.currentAuthenticatedUser({ bypassCache: false })
-    .then(user => {
-      dispatch({
-        type: 'AUTH_CURRENT_USER',
-        payload: { user }
-      })
-    })
-    .catch(err => console.log('error getting user', err))*/
   }, [])
 
-  const dispatchContext = useMemo(() => ({
-    test: async () => {
-      dispatch({type: 'TEST'})
-    },
-    signOut: async () => {
-      try {
-        await Auth.signOut()
-      } catch(error) {
-        console.log('error signing out: ', error)
-      }
-      dispatch({type: 'SIGN_OUT'})
+  const authContext = useMemo(() => ({
+    action: async ({type, payload}: IAuthActionData) => {
+      dispatch({
+        type: type,
+        payload: payload
+      })
     }
   }), [])
 
+  const apiContext = useMemo(() => ({
+    action: async ({type, operation, model, variables}: IApiActionData) => {
+      const getType = (type) => (
+        type == 'query' ? queries :
+        type == 'mutation' ? mutations :
+        type == 'subscription' ? subscriptions :
+        queries
+      )
+      const res = await API.graphql(
+        graphqlOperation(
+          getType(type)[`${operation}${model}`],
+          variables
+        )
+      )
+
+      // fix to test with classes
+
+      return res
+    }
+  }), [])
+
+  const navigationContext = useMemo(() => (
+    async (data) => {
+      
+    }
+  ), [])
+
   const value = {
-    dispatchContext,
+    authContext,
+    apiContext,
+    //navigationContext,
     state
   }
 

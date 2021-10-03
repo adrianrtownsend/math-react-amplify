@@ -44,5 +44,3 @@ enum ModelClassStatus {
   active
   closed
 }
-
-# Custom Mutations

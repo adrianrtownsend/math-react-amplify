@@ -1,23 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 
-import { Box } from 'native-base';
+import { Box, HStack, StatusBar, Text } from 'native-base'
 
-const ClassesScreen = () => {
+import Content from '../components/Content'
+import Heading from '../components/Heading'
+import List from '../components/List'
+import Select from '../components/Select'
+
+const filters = [
+  {
+    label: 'Classes',
+  },
+  {
+   label: 'Assignments'
+  }
+];
+
+const ClassesScreen = ({ route }) => {
 
   const [state, setstate] = useState()
 
-  useEffect(() => {
-    return () => {
-    }
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+    }, [])
+  )
 
   return (
-    <Box>
+    <Box flex={1} p="5">
+      <StatusBar />
+      <HStack><Text>Classes</Text></HStack>
       {/*Top Navigation (Logout) */}
-     {/*<Heading 
+      {/*<Heading 
       label={'Classes'}
-     />*/}
-     {/*<Content>user specific content</Content>*/} 
+      />*/}
+      <Select data={filters} />
+      <Content flex={4}>
+
+      </Content>
     </Box>
   );
 };

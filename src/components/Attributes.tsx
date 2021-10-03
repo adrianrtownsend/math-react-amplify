@@ -1,6 +1,8 @@
+import * as React from 'react'
+
 import { Center, Divider, Flex, Heading, Text, Stack } from 'native-base'
 
-export const Attributes = (props) => {
+const Attributes = (props) => {
 
   const items = props.data.map((element, index, array) => (
     <>
@@ -15,12 +17,10 @@ export const Attributes = (props) => {
   ))
 
   return (
-    <>
-      <Divider my="2" />
-        <Flex mx="3" direction="row" justify="space-evenly">
-          {items}
-        </Flex> 
-      <Divider my="2" />
-    </>
+    <Flex mx="3" direction="row" justify="space-evenly">
+      {items}
+    </Flex> 
   )
 }
+
+export default Attributes

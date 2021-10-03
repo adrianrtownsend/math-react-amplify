@@ -1,51 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import React, { useState, useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 
-import { Avatar, Center, CheckIcon, Divider, FlatList, Flex, Heading, HStack, NativeBaseProvider, Text, Box, ScrollView, Stack, VStack, Pressable, Image } from 'native-base'
+import { EditOutlined } from '@ant-design/icons'
+import { Avatar, Box, HStack, Text, VStack, StatusBar } from 'native-base'
 
-import { EditOutlined, RightOutlined } from '@ant-design/icons'
+import Attributes from '../components/Attributes'
+import Content from '../components/Content'
+import Heading from '../components/Heading'
+import List from '../components/List'
+import Select from '../components/Select'
 
-import { Select } from '../components/Select'
-import { Button } from '../components/Button'
-import { Attributes } from '../components/Attributes'
-
-const resClasses = [
-  {
-    id: 1,
-    code: "ADD3523",
-    teacher: "Ms. Jones",
-    grade: "B",
-    score: "85"
-  },
-  {
-    id: 2,
-    code: "ADD3523",
-    teacher: "Ms. Jones",
-    grade: "B",
-    score: "85"
-  },
-  {
-    id: 3,
-    code: "ADD3523",
-    teacher: "Ms. Jones",
-    grade: "B",
-    score: "85"
-  },
-  {
-    id: 4,
-    code: "ADD3523",
-    teacher: "Ms. Jones",
-    grade: "B",
-    score: "85"
-  },
-  {
-    id: 5,
-    code: "ADD3523",
-    teacher: "Ms. Jones",
-    grade: "B",
-    score: "85"
-  }
-];
+import * as Test from '../../testData.json'
 
 // change to either context or mutations
 const filters = [
@@ -63,21 +28,23 @@ const stats = [
 ]
 
 
-const Profile = () => {
+const Profile = ({ route }) => {
 
-  const [classes, setClasses] = useState([]);
+  const [profile, setProfile] = useState({})
 
-  useEffect(() => {
-    setClasses(() => {
-      console.log('classes loaded', resClasses);
-      return resClasses
-    });
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+    }, [])
+  )
 
   return (
-    <Center flex={1}>
-      <Stack>
-        <HStack space={3} alignItems="center">
+    <Box flex={1} p="5">
+      <StatusBar />
+      <Heading>
+        <HStack
+          alignItems="center"
+          justifyContent="space-evenly"
+        >
           <Avatar
             bg="pink.600"
             size="xl"
@@ -86,47 +53,28 @@ const Profile = () => {
             }}
           ></Avatar>
           <VStack>
-            <Text>Username</Text>
-            <Text>Email</Text>
+            {/* Username */}
+            <Text>{'student0123'}</Text>
+            {/* Email */}
+            <Text>{'testmail@mail.com'}</Text>
           </VStack>
           <EditOutlined />
         </HStack>
-        <Text>Classes {'30'}</Text>
-        <Attributes 
-          data={stats}
+        <Attributes data={stats} />
+        <Select data={filters} />
+      </Heading>
+      <Content flex={4}>
+        <List
+          action={{
+            type: 'query',
+            operation: 'get',
+            model: 'Class',
+            variables: {}
+          }}
         />
-        <Select 
-          data={filters}
-        />
-        <Divider my="2" />
-        <Button
-          label={'Test'}
-          type={'create'}
-          onPress={'test'}
-        />
-        {/*<ScrollView>
-          <FlatList
-            data={classes}
-            renderItem={({item}) => (
-              <Box
-              my="2"
-              rounded="md"
-              >
-                <HStack>
-                  <Text>{item.grade}</Text>
-                  <Text>{item.code}</Text>
-                  <Text>{item.score}</Text>
-                  <Divider orientation="vertical" mx="1" />
-                  <RightOutlined />
-                </HStack>
-              </Box>
-            )}
-            keyExtractor={(item) => item.id}
-          />
-        </ScrollView>*/}
-      </Stack>
-    </Center>
+      </Content>
+    </Box>
   ) 
-};
+}
 
-export default Profile;
+export default Profile
